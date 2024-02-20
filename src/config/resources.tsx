@@ -26,6 +26,7 @@ export const resources: IResourceItem[] = [
     edit: "/blog-posts/edit/:id",
     show: "/blog-posts/show/:id",
     meta: {
+      label: "Failover",
       canDelete: true,
     },
   },
@@ -36,6 +37,7 @@ export const resources: IResourceItem[] = [
     edit: "/categories/edit/:id",
     show: "/categories/show/:id",
     meta: {
+      label: "Customer",
       canDelete: true,
     },
   },
@@ -46,7 +48,7 @@ export const resources: IResourceItem[] = [
     edit: "/calendar/edit/:id",
     show: "/calendar/show/:id",
     meta: {
-      label: "Calendar",
+      label: "Customer Group",
       icon: <CalendarOutlined />,
     },
   },
@@ -57,7 +59,6 @@ export const resources: IResourceItem[] = [
       icon: <ProjectOutlined />,
     },
   },
-
   {
     name: "tasks",
     list: "/scrumboard/kanban",
@@ -78,49 +79,14 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "deals",
-    list: "/scrumboard/sales",
-    create: "/scrumboard/sales/create",
-    edit: "/scrumboard/sales/edit/:id",
-    meta: {
-      label: "Sales Pipeline",
-      parent: "scrumboard",
-    },
-  },
-  {
-    name: "deals",
-    identifier: "finalize-deals",
-    edit: "/scrumboard/sales/:id/finalize",
-    meta: {
-      hide: true,
-    },
-  },
-  {
-    name: "dealStages",
-    create: "/scrumboard/sales/stages/create",
-    edit: "/scrumboard/sales/stages/edit/:id",
-    list: "/scrumboard/sales",
-    meta: {
-      hide: true,
-    },
-  },
-  {
     name: "companies",
     list: "/companies",
     show: "/companies/:id",
     create: "/companies/create",
     edit: "/companies/edit/:id",
     meta: {
-      label: "Companies",
+      label: "Report",
       icon: <ShopOutlined />,
-    },
-  },
-  {
-    name: "companies",
-    identifier: "sales-companies",
-    create: "/scrumboard/sales/create/company/create",
-    meta: {
-      hide: true,
     },
   },
   {
@@ -130,42 +96,8 @@ export const resources: IResourceItem[] = [
     edit: "/contacts/edit/:id",
     show: "/contacts/show/:id",
     meta: {
-      label: "Contacts",
+      label: "Push Notification",
       icon: <TeamOutlined />,
-    },
-  },
-  {
-    name: "quotes",
-    list: "/quotes",
-    create: "/quotes/create",
-    edit: "/quotes/edit/:id",
-    show: "/quotes/show/:id",
-    meta: {
-      label: "Quotes",
-      icon: <ContainerOutlined />,
-    },
-  },
-  {
-    name: "administration",
-    meta: {
-      label: "Administration",
-      icon: <CrownOutlined />,
-    },
-  },
-  {
-    name: "settings",
-    list: "/administration/settings",
-    meta: {
-      label: "Settings",
-      parent: "administration",
-    },
-  },
-  {
-    name: "audits",
-    list: "/administration/audit-log",
-    meta: {
-      label: "Audit Log",
-      parent: "administration",
     },
   },
 ];
