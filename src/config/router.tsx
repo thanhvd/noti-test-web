@@ -14,11 +14,17 @@ import {
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Header } from "@/components/header";
 import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "@/pages/blog-posts";
+  UserCreate,
+  UserEdit,
+  UserList,
+  UserShow,
+} from "@/pages/users";
+import {
+  ScenarioCreate,
+  ScenarioEdit,
+  ScenarioList,
+  ScenarioShow,
+} from "@/pages/scenarios";
 import {
   CategoryCreate,
   CategoryEdit,
@@ -53,20 +59,26 @@ function AppRouter() {
       >
         <Route
           index
-          element={<NavigateToResource resource="blog_posts" />}
+          element={<NavigateToResource resource="users" />}
         />
-        <Route path="/blog-posts">
-          <Route index element={<BlogPostList />} />
-          <Route path="create" element={<BlogPostCreate />} />
-          <Route path="edit/:id" element={<BlogPostEdit />} />
-          <Route path="show/:id" element={<BlogPostShow />} />
+        <Route path="/users">
+          <Route index element={<UserList />} />
+          <Route path="create" element={<UserCreate />} />
+          <Route path="edit/:id" element={<UserEdit />} />
+          <Route path="show/:id" element={<UserShow />} />
         </Route>
-        <Route path="/categories">
+        <Route path="/scenarios">
+          <Route index element={<ScenarioList />} />
+          <Route path="create" element={<ScenarioCreate />} />
+          <Route path="edit/:id" element={<ScenarioEdit />} />
+          <Route path="show/:id" element={<ScenarioShow />} />
+        </Route>
+        {/* <Route path="/categories">
           <Route index element={<CategoryList />} />
           <Route path="create" element={<CategoryCreate />} />
           <Route path="edit/:id" element={<CategoryEdit />} />
           <Route path="show/:id" element={<CategoryShow />} />
-        </Route>
+        </Route> */}
         <Route
           path="/scrumboard"
           element={<Outlet />}
