@@ -53,7 +53,7 @@ function App() {
         </ColorModeContextProvider>
       </RefineKbarProvider>
     </BrowserRouter>
-  );
+  );    
 }
 
 export default App;

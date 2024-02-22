@@ -22,6 +22,12 @@
       "name": "groupThanh",
       "topic": "topicMobile",
       "channelAvails": "channelAvailsDemo"
+    },
+    {
+      "name": "Son2fasdfasdf",
+      "topic": "Topic Demo 1",
+      "channelAvails": "Channel Demo",
+      "id": 2
     }
   ],
   "groupDetails": [
