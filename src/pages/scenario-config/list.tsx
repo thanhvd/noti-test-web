@@ -51,7 +51,7 @@ import { Task, TaskStage } from "@/graphql/schema.types";
 //   "totalCount": 4
 // }
 
-// const tasks = {
+// const steps = {
 //   "data": [
 //     {
 //       "id": "14",
@@ -364,22 +364,6 @@ import { Task, TaskStage } from "@/graphql/schema.types";
 export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
   const { create, edit, replace } = useNavigation();
 
-  const { data: stages, isLoading: isLoadingStages } = useList<TaskStage>({
-    resource: "stages",
-    pagination: {
-      mode: "off",
-    },
-    sorters: [
-      {
-        field: "createdAt",
-        order: "asc",
-      },
-    ],
-    queryOptions: {
-
-    }
-  });
-
   const {
     resource,
     action,
@@ -393,8 +377,31 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     //   ...restParams // TParams - Any other parameters are also parsed and available in `params`
     // },
   } = useParsed();
-  console.log("thanh", id)
-  const { data: tasks, isLoading: isLoadingTasks } = useList<Task>({
+
+  // const { data: stages, isLoading: isLoadingStages } = useList<TaskStage>({
+  //   resource: "stages",
+  //   filters: [
+  //     {
+  //       field: "scenarioId",
+  //       operator: "eq",
+  //       value: id,
+  //     },
+  //   ],
+  //   pagination: {
+  //     mode: "off",
+  //   },
+  //   sorters: [
+  //     {
+  //       field: "createdAt",
+  //       order: "asc",
+  //     },
+  //   ],
+  //   queryOptions: {
+
+  //   }
+  // });
+
+  const { data: steps, isLoading: isLoadingTasks } = useList<Task>({
     resource: "steps",
     // sorters: [
     //   {
@@ -419,32 +426,32 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
       // gqlQuery: KANBAN_TASKS_QUERY,
     },
   });
-  const initTasks = tasks?.data.filter((task: any) => !task.prevStepId) || []
-  // const stages = {
-  //   data: initTasks.map((item: any, index: number) => ({
-  //     id: item.id,
-  //     title: `Stage ${index + 1}`
-  //   }))
-  // }
+  const initTasks = steps?.data.filter((task: any) => !task.prevStepId) || []
+  const stages = {
+    data: initTasks.map((item: any, index: number) => ({
+      id: item.id,
+      title: `Stage ${index + 1}`
+    }))
+  }
 
 
   // its convert Task[] to TaskStage[] (group by stage) for kanban
-  // uses `stages` and `tasks` from useList hooks
+  // uses `stages` and `steps` from useList hooks
   // const taskStages = useMemo(() => {
-  //     if (!tasks?.data || !stages?.data)
+  //     if (!steps?.data || !stages?.data)
   //         return {
   //             unassignedStage: [],
   //             stages: [],
   //         };
 
-  //     const unassignedStage = tasks.data.filter(
+  //     const unassignedStage = steps.data.filter(
   //         (task) => task.stageId === null,
   //     );
 
   //     // prepare unassigned stage
   //     const grouped = stages.data.map((stage) => ({
   //         ...stage,
-  //         tasks: tasks.data.filter(
+  //         steps: steps.data.filter(
   //             (task) => task.stageId?.toString() === stage.id,
   //         ),
   //     }));
@@ -453,7 +460,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
   //         unassignedStage,
   //         stages: grouped,
   //     };
-  // }, [tasks, stages]);
+  // }, [steps, stages]);
 
   // const { mutate: updateTask } = useUpdate<
   //     Task,
@@ -529,7 +536,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
   };
 
   const getContextMenuItems = (column: any) => {
-    const hasItems = column.tasks.length > 0;
+    const hasItems = column.steps.length > 0;
 
     const items: MenuProps["items"] = [
       {
@@ -545,7 +552,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
         disabled: !hasItems,
         onClick: () =>
           handleClearCards({
-            taskIds: column.tasks.map((task: any) => task.id),
+            taskIds: column.steps.map((task: any) => task.id),
           }),
       },
       {
@@ -564,21 +571,21 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
 
 
   const taskStages = useMemo(() => {
-    if (!tasks?.data || !stages?.data)
+    if (!steps?.data || !stages?.data)
       return {
         unassignedStage: [],
         stages: [],
       };
 
-    const unassignedStage = tasks.data.filter(
+    const unassignedStage = steps.data.filter(
       (task) => task.stageId === null,
     );
 
     // prepare unassigned stage
     const grouped = stages.data.map((stage) => ({
       ...stage,
-      tasks: tasks.data.filter(
-        (task) => task.stageId?.toString() === stage.id,
+      steps: steps.data.filter(
+        (task) => task.stageId === stage.id,
       ),
     }));
 
@@ -586,9 +593,13 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
       unassignedStage,
       stages: grouped,
     };
-  }, [tasks, stages]);
+  }, [steps, stages]);
 
   const isLoading = false //isLoadingTasks || isLoadingStages;
+
+  console.log("taskStages", taskStages)
+  console.log("steps", steps)
+  // console.log("grouped", grouped)
 
   if (isLoading) return <PageSkeleton />;
 
@@ -628,7 +639,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
               key={column.id}
               id={column.id}
               title={column.title}
-              count={column.tasks.length}
+              count={column.steps.length}
               contextMenuItems={contextMenuItems}
               onAddClick={() =>
                 handleAddCard({ stageId: column.id })
@@ -636,7 +647,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
             >
               {isLoading && <ProjectCardSkeleton />}
               {!isLoading &&
-                column.tasks.map((task) => {
+                column.steps.map((task) => {
                   return (
                     <KanbanItem
                       key={task.id}
@@ -650,7 +661,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
                     </KanbanItem>
                   );
                 })}
-              {!column.tasks.length && (
+              {!column.steps.length && (
                 <KanbanAddCardButton
                   onClick={() =>
                     handleAddCard({ stageId: column.id })
