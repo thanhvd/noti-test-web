@@ -59,6 +59,17 @@ export const resources: IResourceItem[] = [
       canDelete: true,
     },
   },
+  {
+    name: "groupUsers",
+    list: "/group-users",
+    create: "/group-users/create",
+    edit: "/group-users/edit/:id",
+    show: "/group-users/show/:id",
+    meta: {
+      label: "Group Users",
+      canDelete: true,
+    },
+  },
   // {
   //   name: "scrumboard",
   //   meta: {
