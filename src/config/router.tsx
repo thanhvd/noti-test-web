@@ -34,10 +34,10 @@ import {
 import { ForgotPassword } from "@/pages/forgotPassword";
 import { Login } from "@/pages/login";
 import { Register } from "@/pages/register";
-import { KanbanCreateStage, KanbanPage } from "@/pages/scrumboard/kanban";
-import { KanbanCreatePage } from "@/pages/scrumboard/kanban/create";
-import { KanbanEditPage } from "@/pages/scrumboard/kanban/edit";
-import { KanbanEditStage } from "@/pages/scrumboard/kanban/edit-stage";
+import { KanbanCreateStage, KanbanPage } from "@/pages/scenario-config";
+import { KanbanCreatePage } from "@/pages/scenario-config/create";
+import { KanbanEditPage } from "@/pages/scenario-config/edit";
+import { KanbanEditStage } from "@/pages/scenario-config/edit-stage";
 
 function AppRouter() {
   return (
@@ -72,6 +72,13 @@ function AppRouter() {
           <Route path="create" element={<ScenarioCreate />} />
           <Route path="edit/:id" element={<ScenarioEdit />} />
           <Route path="show/:id" element={<ScenarioShow />} />
+          <Route path="config/:id" element={<KanbanPage><Outlet /></KanbanPage>}>
+            {/* <Route index element={<KanbanPage />} /> */}
+            <Route path="create" element={<KanbanCreatePage />} />
+            <Route path="edit/:id" element={<KanbanEditPage />} />
+            <Route path="stages/create" element={<KanbanCreateStage />} />
+            <Route path="stages/edit/:id" element={<KanbanEditStage />} />
+          </Route>
         </Route>
         {/* <Route path="/categories">
           <Route index element={<CategoryList />} />

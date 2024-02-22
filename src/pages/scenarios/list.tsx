@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DATETIME_FORMAT, DATE_FORMAT } from "@/utilities";
+import { ScheduleOutlined } from "@ant-design/icons";
 import {
   DateField,
   DeleteButton,
@@ -8,14 +9,15 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { BaseRecord, IResourceComponentsProps, useMany } from "@refinedev/core";
-import { Space, Table } from "antd";
+import { BaseRecord, IResourceComponentsProps, useLink, useMany } from "@refinedev/core";
+import { Button, Space, Table } from "antd";
 import React from "react";
 
 export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
+  const Link = useLink();
 
   const { data: groupData, isLoading: groupIsLoading } = useMany({
     resource: "groupUsers",
@@ -82,6 +84,9 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
             <Space>
+              <Link to={`/scenarios/config/${record.id}`}>
+                <Button size="small" icon={<ScheduleOutlined />} />
+              </Link>
               <EditButton hideText size="small" recordItemId={record.id} />
               <ShowButton hideText size="small" recordItemId={record.id} />
               <DeleteButton hideText size="small" recordItemId={record.id} />

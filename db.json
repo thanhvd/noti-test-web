@@ -117,7 +117,8 @@
       "responseTimeMin": 1,
       "responseTimeSecond": 1,
       "sentTime": "2024-02-22T00:00:00.000Z",
-      "isFailOver": 1
+      "isFailOver": 1,
+      "stageId": 1
     },
     {
       "id": 2,
@@ -139,7 +140,8 @@
       "responseTimeMin": 1,
       "responseTimeSecond": 1,
       "sentTime": "2024-02-22T00:00:00.000Z",
-      "isFailOver": 1
+      "isFailOver": 1,
+      "stageId": 1
     },
     {
       "id": 3,
@@ -161,7 +163,8 @@
       "responseTimeMin": 1,
       "responseTimeSecond": 1,
       "sentTime": "2024-02-22T00:00:00.000Z",
-      "isFailOver": 1
+      "isFailOver": 1,
+      "stageId": 1
     },
     {
       "id": 4,
@@ -183,7 +186,30 @@
       "responseTimeMin": 1,
       "responseTimeSecond": 1,
       "sentTime": "2024-02-22T00:00:00.000Z",
-      "isFailOver": 1
+      "isFailOver": 1,
+      "stageId": 4
+    }
+  ],
+  "stages": [
+    {
+      "id": 1,
+      "title": "Stage 1",
+      "scenarioId": 1
+    },
+    {
+      "id": 2,
+      "title": "Stage 2",
+      "scenarioId": 1
+    },
+    {
+      "id": 3,
+      "title": "Stage 3",
+      "scenarioId": 1
+    },
+    {
+      "id": 4,
+      "title": "Stage 1",
+      "scenarioId": 2
     }
   ],
   "messages": [

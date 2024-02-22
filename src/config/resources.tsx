@@ -31,6 +31,24 @@ export const resources: IResourceItem[] = [
     },
   },
   {
+    name: "steps",
+    list: "/scenarios/config/:id",
+    create: "/scenarios/config/:id/create",
+    edit: "/scenarios/config/:id/edit/:id",
+    meta: {
+      hide: true
+    },
+  },
+  {
+    name: "stepStages",
+    create: "/scenarios/config/:id/stages/create",
+    edit: "/scenarios/config/:id/stages/edit/:id",
+    list: "/scenarios/config/:id",
+    meta: {
+      hide: true,
+    },
+  },
+  {
     name: "users",
     list: "/users",
     create: "/users/create",
@@ -41,32 +59,32 @@ export const resources: IResourceItem[] = [
       canDelete: true,
     },
   },
-  {
-    name: "scrumboard",
-    meta: {
-      label: "Scrumboard",
-      icon: <ProjectOutlined />,
-    },
-  },
-  {
-    name: "tasks",
-    list: "/scrumboard/kanban",
-    create: "/scrumboard/kanban/create",
-    edit: "/scrumboard/kanban/edit/:id",
-    meta: {
-      label: "Project Kanban",
-      parent: "scrumboard",
-    },
-  },
-  {
-    name: "taskStages",
-    create: "/scrumboard/kanban/stages/create",
-    edit: "/scrumboard/kanban/stages/edit/:id",
-    list: "/scrumboard/kanban",
-    meta: {
-      hide: true,
-    },
-  },
+  // {
+  //   name: "scrumboard",
+  //   meta: {
+  //     label: "Scrumboard",
+  //     icon: <ProjectOutlined />,
+  //   },
+  // },
+  // {
+  //   name: "tasks",
+  //   list: "/scrumboard/kanban",
+  //   create: "/scrumboard/kanban/create",
+  //   edit: "/scrumboard/kanban/edit/:id",
+  //   meta: {
+  //     label: "Project Kanban",
+  //     parent: "scrumboard",
+  //   },
+  // },
+  // {
+  //   name: "taskStages",
+  //   create: "/scrumboard/kanban/stages/create",
+  //   edit: "/scrumboard/kanban/stages/edit/:id",
+  //   list: "/scrumboard/kanban",
+  //   meta: {
+  //     hide: true,
+  //   },
+  // },
   {
     name: "companies",
     list: "/companies",
