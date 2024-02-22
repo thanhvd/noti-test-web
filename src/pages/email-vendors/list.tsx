@@ -7,11 +7,11 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { BaseRecord, IResourceComponentsProps, useList, useMany } from "@refinedev/core";
+import { BaseRecord, IResourceComponentsProps } from "@refinedev/core";
 import { Space, Table } from "antd";
 import React from "react";
 
-export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
+export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
@@ -36,9 +36,11 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
           title={"Updated At"}
           render={(value: any) => <DateField value={value} />}
         />
-        <Table.Column dataIndex="name" title={"Name"} />
-        <Table.Column dataIndex="topic" title={"Topic"} />
-        <Table.Column dataIndex="channelAvails" title={"Channel Available"} />
+        <Table.Column dataIndex="hostName" title={"Hostname"} />
+        <Table.Column dataIndex="port" title={"Port"} />
+        <Table.Column dataIndex="userName" title={"Username"} />
+        <Table.Column dataIndex="password" title={"Password"} />
+        <Table.Column dataIndex="priority" title={"Priority"} />
 
         <Table.Column
           title={"Actions"}

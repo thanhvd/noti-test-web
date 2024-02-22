@@ -39,6 +39,8 @@ import { KanbanCreatePage } from "@/pages/scenario-config/create";
 import { KanbanEditPage } from "@/pages/scenario-config/edit";
 import { KanbanEditStage } from "@/pages/scenario-config/edit-stage";
 import { GroupUserCreate, GroupUserEdit, GroupUserList, GroupUserShow } from "@/pages/group-users";
+import { TemplateCreate, TemplateEdit, TemplateList, TemplateShow } from "@/pages/template";
+import { EmailVendorsCreate, EmailVendorsEdit, EmailVendorsList, EmailVendorsShow } from "@/pages/email-vendors";
 
 function AppRouter() {
   return (
@@ -68,12 +70,28 @@ function AppRouter() {
           <Route path="edit/:id" element={<UserEdit />} />
           <Route path="show/:id" element={<UserShow />} />
         </Route>
+
         <Route path="/group-users">
           <Route index element={<GroupUserList />} />
           <Route path="create" element={<GroupUserCreate />} />
           <Route path="edit/:id" element={<GroupUserEdit />} />
           <Route path="show/:id" element={<GroupUserShow />} />
         </Route>
+
+        <Route path="/template">
+          <Route index element={<TemplateList />} />
+          <Route path="create" element={<TemplateCreate />} />
+          <Route path="edit/:id" element={<TemplateEdit />} />
+          <Route path="show/:id" element={<TemplateShow />} />
+        </Route>
+
+        <Route path="/email-vendors">
+          <Route index element={<EmailVendorsList />} />
+          <Route path="create" element={<EmailVendorsCreate />} />
+          <Route path="edit/:id" element={<EmailVendorsEdit />} />
+          <Route path="show/:id" element={<EmailVendorsShow />} />
+        </Route>
+
         <Route path="/scenarios">
           <Route index element={<ScenarioList />} />
           <Route path="create" element={<ScenarioCreate />} />
@@ -87,6 +105,7 @@ function AppRouter() {
             <Route path="stages/edit/:id" element={<KanbanEditStage />} />
           </Route>
         </Route>
+
         {/* <Route path="/categories">
           <Route index element={<CategoryList />} />
           <Route path="create" element={<CategoryCreate />} />
@@ -106,6 +125,7 @@ function AppRouter() {
         </Route>
         <Route path="*" element={<ErrorComponent />} />
       </Route>
+
       <Route
         element={
           <Authenticated

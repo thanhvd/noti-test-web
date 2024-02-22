@@ -70,6 +70,28 @@ export const resources: IResourceItem[] = [
       canDelete: true,
     },
   },
+  {
+    name: "templates",
+    list: "/template",
+    create: "/template/create",
+    edit: "/template/edit/:id",
+    show: "/template/show/:id",
+    meta: {
+      label: "Templates",
+      canDelete: true,
+    },
+  },
+  {
+    name: "emailVendors",
+    list: "/email-vendors",
+    create: "/email-vendors/create",
+    edit: "/email-vendors/edit/:id",
+    show: "/email-vendors/show/:id",
+    meta: {
+      label: "Email Vendors",
+      canDelete: true,
+    },
+  },
   // {
   //   name: "scrumboard",
   //   meta: {
