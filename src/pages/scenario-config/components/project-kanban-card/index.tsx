@@ -16,6 +16,7 @@ import {
     Card,
     ConfigProvider,
     Dropdown,
+    Image,
     Skeleton,
     Space,
     Tag,
@@ -29,6 +30,11 @@ import { CustomAvatar, Text, TextIcon } from "@/components";
 import { User } from "@/graphql/schema.types";
 import { getDateColor } from "@/utilities";
 import { DateField, NumberField, Show, TextField } from "@refinedev/antd";
+import styles from "./index.module.css";
+import favIcon from "../../../../../public/211694_bell_icon.png"
+import transfIcon from "../../../../../public/compute-trans.png"
+import roundtransIcon from "../../../../../public/circle-arrow-icon.png"
+import clockIcon from "../../../../../public/clock.png"
 
 // const { Text } = Typography;
 
@@ -143,7 +149,8 @@ export const ProjectCard = ({
             }}
         >
             <Card
-                size="small"
+                className={styles.container}
+                size="default"
                 title={<Text ellipsis={{ tooltip: channel }}>{channel}</Text>}
                 onClick={() => {
                     edit("steps", id, "replace");
@@ -184,10 +191,46 @@ export const ProjectCard = ({
                 }
             >
                 <Space direction="vertical">
-                    <Text>{"Priority: "} <TextField value={data?.priority} /></Text>
-                    <Text>{"TemplateId: "} <TextField value={data?.templateId} /></Text>
+                    <Image width={40} height={40} src={favIcon} />
+                    <Text size="xl" className={styles.text} >Gửi đến:</Text>
+                    <Text size="xl" className={styles.title}>Chương trình lì xì tết đầu năm</Text>
+                    <Text size="xs" className={styles.content}>he he hh eheh eh eh eh e he he he heho ho oho ho ho hoho fdo dofh odfho dfho dfoh dfoh odf odf odfho dfoh dfoh dfo hdfoh odfho dfho dfoh dofh </Text>
+                    <Text size="sm" className={styles.editMessage}>Edit message</Text>
+                    <div className={styles.timeContainer}>
+                        <div className={styles.timeItem}>
+                            <Image width={20} height={20} src={transfIcon}></Image>
+                        </div>
+                        <div className={styles.timeItem}>
+                            <Image width={20} height={20} src={roundtransIcon} />
+                            <div className={styles.smallTimeItem}>
+                                <TextField value={data?.delayRetryHour} />h
+                            </div>
+                            <div className={styles.smallTimeItem}>
+                                <TextField value={data?.delayRetryMin} />m
+                            </div>
+                            <div className={styles.smallTimeItem}>
+                                <TextField value={data?.delayRetrySecond} />s
+                            </div>
+                        </div>
 
-                    <Text>{"ChannelData: "} <TextField value={data?.channelData} /></Text>
+                        <div className={styles.timeItem}>
+                            <Image width={25} height={25} src={clockIcon} />
+                            <div className={styles.smallTimeItem}>
+                                <TextField value={data?.responseTimeHour} />h
+                            </div>
+                            <div className={styles.smallTimeItem}>
+                                <TextField value={data?.responseTimeMin} />m
+                            </div>
+                            <div className={styles.smallTimeItem}>
+                                <TextField value={data?.responseTimeSecond} />s
+                            </div>
+                        </div>
+                    </div>
+
+                    <Button className={styles.button}>Save</Button>
+                    {/* <Text >{"Priority: "} <TextField value={data?.priority} /></Text> */}
+                    {/* <Text>{"TemplateId: "} <TextField value={data?.templateId} /></Text> */}
+                    {/* <Text>{"ChannelData: "} <TextField value={data?.channelData} /></Text>
                     <Text>{"NumberRetry"} <TextField value={data?.numberRetry} /></Text>
 
                     <Text>{"DelayRetryHour: "} <TextField value={data?.delayRetryHour} /></Text>
@@ -202,7 +245,7 @@ export const ProjectCard = ({
 
                     <Text>{"ResponseTimeSecond: "} <TextField value={data?.responseTimeSecond} /></Text>
 
-                    <Text>{"SentTime: "} <TextField value={data?.sentTime} /></Text>
+                    <Text>{"SentTime: "} <TextField value={data?.sentTime} /></Text> */}
 
                     {/* <Text>{"CreatedAt: "}  <DateField value={data?.createdAt} /></Text> */}
 
