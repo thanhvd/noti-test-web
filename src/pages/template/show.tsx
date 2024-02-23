@@ -1,4 +1,4 @@
-import { API_URL } from "@/utilities";
+import { NOTIAPI_URL } from "@/utilities";
 import {
   DateField,
   NumberField,
@@ -14,7 +14,7 @@ const { Title } = Typography;
 export const TemplateShow: React.FC<IResourceComponentsProps> = () => {
   const { id } = useParsed();
   const { data, isLoading } = useCustom({
-    url: `${API_URL}/template/${id}/detail`,
+    url: `${NOTIAPI_URL}/template/${id}/detail`,
     method: 'get'
   });
 

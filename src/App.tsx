@@ -18,7 +18,8 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { resources } from "./config";
 import AppRouter from "./config/router";
 import { restDataProvider } from "@/providers/rest-data-provider";
-import { API_URL } from "./utilities";
+import { notiapiDataProvider } from "./providers/notiapi-data-provider";
+import { JSON_SERVER_API_URL, NOTIAPI_URL } from "./utilities";
 
 
 function App() {
@@ -29,7 +30,10 @@ function App() {
           <AntdApp>
             <DevtoolsProvider>
               <Refine
-                dataProvider={restDataProvider(API_URL)}
+                dataProvider={{
+                  default: notiapiDataProvider(NOTIAPI_URL),
+                  jsonServer: restDataProvider(JSON_SERVER_API_URL),
+                }}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerProvider}
                 authProvider={authProvider}
