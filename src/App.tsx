@@ -18,9 +18,8 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { resources } from "./config";
 import AppRouter from "./config/router";
 import { restDataProvider } from "@/providers/rest-data-provider";
+import { API_URL } from "./utilities";
 
-// const API_URL = "https://api.fake-rest.refine.dev";
-const API_URL = "http://localhost:5555";
 
 function App() {
   return (

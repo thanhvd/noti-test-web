@@ -4,7 +4,9 @@ import { Form, Input, Select } from "antd";
 import React from "react";
 
 export const TemplateCreate: React.FC<IResourceComponentsProps> = () => {
-  const { formProps, saveButtonProps } = useForm({});
+  const { formProps, saveButtonProps } = useForm({
+    resource: 'template/create'
+  });
 
   return (
     <Create saveButtonProps={saveButtonProps}>

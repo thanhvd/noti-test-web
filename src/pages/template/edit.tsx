@@ -4,7 +4,13 @@ import { Form, Input, Select } from "antd";
 import React from "react";
 
 export const TemplateEdit: React.FC<IResourceComponentsProps> = () => {
-  const { formProps, saveButtonProps, formLoading } = useForm({});
+  const { formProps, saveButtonProps, formLoading } = useForm({
+    resource: 'template/update',
+    id: 1
+  });
+
+  console.log("formProps", formProps)
+  console.log("saveButtonProps", saveButtonProps)
 
   return (
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>

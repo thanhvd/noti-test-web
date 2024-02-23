@@ -1,20 +1,24 @@
+import { API_URL } from "@/utilities";
 import {
   DateField,
   NumberField,
   Show,
   TextField,
 } from "@refinedev/antd";
-import { IResourceComponentsProps, useShow } from "@refinedev/core";
+import { IResourceComponentsProps, useCustom, useParsed, useShow } from "@refinedev/core";
 import { Typography } from "antd";
 import React from "react";
 
 const { Title } = Typography;
 
 export const TemplateShow: React.FC<IResourceComponentsProps> = () => {
-  const { queryResult } = useShow({});
-  const { data, isLoading } = queryResult;
+  const { id } = useParsed();
+  const { data, isLoading } = useCustom({
+    url: `${API_URL}/template/${id}/detail`,
+    method: 'get'
+  });
 
-  const record = data?.data;
+  const record = data?.data?.data;
 
   return (
     <Show isLoading={isLoading}>
