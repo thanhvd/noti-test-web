@@ -34,6 +34,12 @@
       "name": "groupThanh",
       "topic": "topicMobile",
       "channelAvails": "channelAvailsDemo"
+    },
+    {
+      "name": "academy",
+      "topic": "22",
+      "channelAvails": "ss",
+      "id": 2
     }
   ],
   "groupDetails": [
@@ -55,6 +61,12 @@
       "channel": "channelThanh",
       "title": "titleMobile",
       "content": "contentDemo"
+    },
+    {
+      "channel": "sdasd",
+      "title": "sdw",
+      "content": "dwqdqwd",
+      "id": 2
     }
   ],
   "emailVendors": [
@@ -89,7 +101,7 @@
       "updatedAt": "2024-02-22T00:00:00.000Z",
       "name": "nameThanh",
       "groupId": 1,
-      "startTime": "2024-02-22T00:00:00.000Z",
+      "startTime": "2024-02-15T23:05:05.000Z",
       "userId": 1,
       "status": "success"
     },
@@ -131,7 +143,9 @@
       "sentTime": "2024-02-22T00:00:00.000Z",
       "isFailOver": 1,
       "groupCode": "group-1",
-      "groupName": "Group 1"
+      "groupName": "Group 1",
+      "completed": false,
+      "checklist": []
     },
     {
       "id": 2,

@@ -45,22 +45,12 @@ export const ScenarioEdit: React.FC<IResourceComponentsProps> = () => {
         <Form.Item
           label={"Group"}
           name={["groupId"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
         >
           <Select {...groupSelectProps} />
         </Form.Item>
         <Form.Item
           label={"User"}
           name={["userId"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
         >
           <Select {...userSelectProps} />
         </Form.Item>

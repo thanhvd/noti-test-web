@@ -43,6 +43,7 @@ import { TemplateCreate, TemplateEdit, TemplateList, TemplateShow } from "@/page
 import { EmailVendorsCreate, EmailVendorsEdit, EmailVendorsList, EmailVendorsShow } from "@/pages/email-vendors";
 import { MessagesCreate, MessagesEdit, MessagesList, MessagesShow } from "@/pages/messages";
 import { StepsCreate, StepsEdit, StepsList, StepsShow } from "@/pages/steps";
+import { DashboardPage } from "@/pages/dashboard";
 
 function AppRouter() {
   return (
@@ -62,9 +63,13 @@ function AppRouter() {
           </Authenticated>
         }
       >
-        <Route
+        {/* <Route
           index
           element={<NavigateToResource resource="users" />}
+        /> */}
+        <Route
+          index
+          element={<DashboardPage />}
         />
         <Route path="/users">
           <Route index element={<UserList />} />

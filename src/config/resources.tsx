@@ -140,26 +140,26 @@ export const resources: IResourceItem[] = [
   //     hide: true,
   //   },
   // },
-  {
-    name: "companies",
-    list: "/companies",
-    show: "/companies/:id",
-    create: "/companies/create",
-    edit: "/companies/edit/:id",
-    meta: {
-      label: "Report",
-      icon: <ShopOutlined />,
-    },
-  },
-  {
-    name: "contacts",
-    list: "/contacts",
-    create: "/contacts/create",
-    edit: "/contacts/edit/:id",
-    show: "/contacts/show/:id",
-    meta: {
-      label: "Push Notification",
-      icon: <TeamOutlined />,
-    },
-  },
+  // {
+  //   name: "companies",
+  //   list: "/companies",
+  //   show: "/companies/:id",
+  //   create: "/companies/create",
+  //   edit: "/companies/edit/:id",
+  //   meta: {
+  //     label: "Report",
+  //     icon: <ShopOutlined />,
+  //   },
+  // },
+  // {
+  //   name: "contacts",
+  //   list: "/contacts",
+  //   create: "/contacts/create",
+  //   edit: "/contacts/edit/:id",
+  //   show: "/contacts/show/:id",
+  //   meta: {
+  //     label: "Push Notification",
+  //     icon: <TeamOutlined />,
+  //   },
+  // },
 ];

@@ -21,12 +21,16 @@ import {
     Tag,
     theme,
     Tooltip,
+    Typography,
 } from "antd";
 import dayjs from "dayjs";
 
 import { CustomAvatar, Text, TextIcon } from "@/components";
 import { User } from "@/graphql/schema.types";
 import { getDateColor } from "@/utilities";
+import { DateField, NumberField, Show, TextField } from "@refinedev/antd";
+
+// const { Text } = Typography;
 
 type ProjectCardProps = {
     id: string;
@@ -53,7 +57,9 @@ export const ProjectCard = ({
     comments,
     dueDate,
     users,
-}: ProjectCardProps) => {
+    channel,
+    data
+}: any) => {
     const { token } = theme.useToken();
     const { edit } = useNavigation();
     const { mutate } = useDelete();
@@ -106,7 +112,7 @@ export const ProjectCard = ({
         }
 
         const total = checkList.length;
-        const checked = checkList?.filter((item) => item.checked).length;
+        const checked = checkList?.filter((item: any) => item.checked).length;
 
         const defaulOptions = {
             color: "default",
@@ -138,7 +144,7 @@ export const ProjectCard = ({
         >
             <Card
                 size="small"
-                title={<Text ellipsis={{ tooltip: title }}>{title}</Text>}
+                title={<Text ellipsis={{ tooltip: channel }}>{channel}</Text>}
                 onClick={() => {
                     edit("steps", id, "replace");
                 }}
@@ -177,7 +183,30 @@ export const ProjectCard = ({
                     </Dropdown>
                 }
             >
-                <div
+                <Space direction="vertical">
+                    <Text>{"Priority: "} <TextField value={data?.priority} /></Text>
+                    <Text>{"TemplateId: "} <TextField value={data?.templateId} /></Text>
+
+                    <Text>{"ChannelData: "} <TextField value={data?.channelData} /></Text>
+                    <Text>{"NumberRetry"} <TextField value={data?.numberRetry} /></Text>
+
+                    <Text>{"DelayRetryHour: "} <TextField value={data?.delayRetryHour} /></Text>
+
+                    <Text>{"delayRetryMin: "} <TextField value={data?.delayRetryMin} /></Text>
+
+                    <Text>{"DelayRetrySecond: "} <TextField value={data?.delayRetrySecond} /></Text>
+
+                    <Text>{"ResponseTimeHour: "} <TextField value={data?.responseTimeHour} /></Text>
+
+                    <Text>{"ResponseTimeMin: "} <TextField value={data?.responseTimeMin} /></Text>
+
+                    <Text>{"ResponseTimeSecond: "} <TextField value={data?.responseTimeSecond} /></Text>
+
+                    <Text>{"SentTime: "} <TextField value={data?.sentTime} /></Text>
+
+                    {/* <Text>{"CreatedAt: "}  <DateField value={data?.createdAt} /></Text> */}
+
+                    {/* <div
                     style={{
                         display: "flex",
                         flexWrap: "wrap",
@@ -285,7 +314,8 @@ export const ProjectCard = ({
                             })}
                         </Space>
                     )}
-                </div>
+                </div> */}
+                </Space>
             </Card>
         </ConfigProvider>
     );

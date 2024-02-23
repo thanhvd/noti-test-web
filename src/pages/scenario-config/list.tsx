@@ -401,7 +401,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
   //   }
   // });
 
-  const { data: steps, isLoading: isLoadingTasks } = useList<Task>({
+  const { data: steps, isLoading: isLoadingTasks } = useList<any>({
     resource: "steps",
     // sorters: [
     //   {
@@ -426,12 +426,19 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
       // gqlQuery: KANBAN_TASKS_QUERY,
     },
   });
-  const initTasks = steps?.data.filter((task: any) => !task.prevStepId) || []
+  const groups = steps?.data.reduce((previousValue, currentStep) => {
+    const isExistGroup = previousValue.find((s: any) => s.id === currentStep.groupCode)
+    console.log("isExistGroup", isExistGroup)
+    return isExistGroup ? previousValue : [...previousValue, {
+      id: currentStep.groupCode,
+      title: currentStep.groupName
+    }]
+  }, []) || []
+
+  // const initTasks = steps?.data.filter((task: any) => !task.prevStepId) || []
   const stages = {
-    data: initTasks.map((item: any, index: number) => ({
-      id: item.id,
-      title: `Stage ${index + 1}`
-    }))
+    data: [...groups, { id: groups.length + 1, title: `Group ${groups.length + 1}` }]
+    // data: groups
   }
 
 
@@ -494,9 +501,9 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     // });
   };
 
-  const handleAddStage = () => {
-    create("stepStages", "replace");
-  };
+  // const handleAddStage = () => {
+  //   create("stepStages", "replace");
+  // };
 
   const handleEditStage = (args: { stageId: string }) => {
     edit("stepStages", args.stageId);
@@ -585,7 +592,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     const grouped = stages.data.map((stage) => ({
       ...stage,
       steps: steps.data.filter(
-        (task) => task.stageId === stage.id,
+        (task) => task.groupCode === stage.id,
       ),
     }));
 
@@ -597,8 +604,6 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
 
   const isLoading = false //isLoadingTasks || isLoadingStages;
 
-  console.log("taskStages", taskStages)
-  console.log("steps", steps)
   // console.log("grouped", grouped)
 
   if (isLoading) return <PageSkeleton />;
@@ -647,17 +652,18 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
             >
               {isLoading && <ProjectCardSkeleton />}
               {!isLoading &&
-                column.steps.map((task) => {
+                column.steps.map((task: any) => {
+                  const data = {
+                    ...task,
+                    stageId: column.id,
+                  }
                   return (
                     <KanbanItem
                       key={task.id}
                       id={task.id}
-                      data={{
-                        ...task,
-                        stageId: column.id,
-                      }}
+                      data={data}
                     >
-                      <ProjectCardMemo {...task} />
+                      <ProjectCardMemo {...task} data={data} />
                     </KanbanItem>
                   );
                 })}
@@ -671,7 +677,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
             </KanbanColumn>
           );
         })}
-        <KanbanAddStageButton onClick={handleAddStage} />
+        {/* <KanbanAddStageButton onClick={handleAddStage} /> */}
       </KanbanBoard>
       {children}
     </>
