@@ -71,7 +71,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "templates",
+    name: "template",
     list: "/template",
     create: "/template/create",
     edit: "/template/edit/:id",

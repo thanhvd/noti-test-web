@@ -25,7 +25,7 @@ export const dataProvider = (
   "createMany" | "updateMany" | "deleteMany"
 > => ({
   getList: async ({ resource, pagination, filters, sorters, meta }) => {
-    const url = `${apiUrl}/${resource}`;
+    const url = `${apiUrl}/${resource}/list`;
 
     const {
       current = 1,
@@ -33,7 +33,7 @@ export const dataProvider = (
       mode = "server",
     } = pagination ?? {};
 
-    const { headers: headersFromMeta, method } = meta ?? {};
+    const { headers, method } = meta ?? {};
     const requestMethod = (method as MethodTypes) ?? "get";
 
     const queryFilters = generateFilter(filters);
@@ -62,18 +62,11 @@ export const dataProvider = (
       ? `${url}?${queryString.stringify(combinedQuery)}`
       : url;
 
-    const { data, headers } = await httpClient[requestMethod](
-      urlWithQuery,
-      {
-        headers: headersFromMeta,
-      },
-    );
-
-    const total = +headers["x-total-count"];
+    const { data } = await httpClient[requestMethod](urlWithQuery, { headers });
 
     return {
-      data,
-      total: total || data.length,
+      data: data.data,
+      total: data.meta?.total || data.data?.length,
     };
   },
 
@@ -87,7 +80,7 @@ export const dataProvider = (
     );
 
     return {
-      data,
+      data: data.data
     };
   },
 

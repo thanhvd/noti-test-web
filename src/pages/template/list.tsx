@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { formatUseTableDataTableProps } from "@/utilities/adapter";
 import {
   DateField,
   DeleteButton,
@@ -14,15 +13,12 @@ import React from "react";
 
 export const TemplateList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
-    // syncWithLocation: true,
-    resource: 'template/list'
+    syncWithLocation: true
   });
-
-  const formattedTableProps = formatUseTableDataTableProps(tableProps)
 
   return (
     <List>
-      <Table {...formattedTableProps} rowKey="id">
+      <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
         <Table.Column
           dataIndex={["createdAt"]}
