@@ -227,7 +227,6 @@ export const ProjectCard = ({
                         </div>
                     </div>
 
-                    <Button className={styles.button}>Save</Button>
                     {/* <Text >{"Priority: "} <TextField value={data?.priority} /></Text> */}
                     {/* <Text>{"TemplateId: "} <TextField value={data?.templateId} /></Text> */}
                     {/* <Text>{"ChannelData: "} <TextField value={data?.channelData} /></Text>
