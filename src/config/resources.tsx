@@ -82,7 +82,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "emailVendors",
+    name: "email/vendor",
     list: "/email-vendors",
     create: "/email-vendors/create",
     edit: "/email-vendors/edit/:id",
