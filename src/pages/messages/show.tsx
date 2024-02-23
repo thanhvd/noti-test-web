@@ -4,7 +4,7 @@ import {
   Show,
   TextField,
 } from "@refinedev/antd";
-import { IResourceComponentsProps, useShow } from "@refinedev/core";
+import { IResourceComponentsProps, useOne, useShow } from "@refinedev/core";
 import { Typography } from "antd";
 import React from "react";
 
@@ -16,26 +16,65 @@ export const MessagesShow: React.FC<IResourceComponentsProps> = () => {
 
   const record = data?.data;
 
+  const { data: scenarioData, isLoading: scenarioIsLoading } = useOne({
+    resource: "scenarios",
+    id: record?.id || "",
+    queryOptions: {
+      enabled: !!record,
+    },
+  });
+
+  const { data: templateData, isLoading: templateIsLoading } = useOne({
+    resource: "templates",
+    id: record?.templateId || "",
+    queryOptions: {
+      enabled: !!record,
+    },
+  });
+
+  const { data: userData, isLoading: userIsLoading } = useOne({
+    resource: "users",
+    id: record?.userId || "",
+    queryOptions: {
+      enabled: !!record,
+    },
+  });
+
+  const { data: groupData, isLoading: groupIsLoading } = useOne({
+    resource: "groupUsers",
+    id: record?.id || "",
+    queryOptions: {
+      enabled: !!record,
+    },
+  });
   return (
     <Show isLoading={isLoading}>
       <Title level={5}>{"ID"}</Title>
       <NumberField value={record?.id ?? ""} />
       <Title level={5}>{"CreatedAt"}</Title>
       <DateField value={record?.createdAt} />
-      <Title level={5}>{"Deleted At"}</Title>
+      <Title level={5}>{"DeletedAt"}</Title>
       <TextField value={record?.deletedAt} />
-      <Title level={5}>{"ScenarioId"}</Title>
-      <TextField value={record?.scenarioId} />
+      <Title level={5}>{"Scenario"}</Title>
+      <TextField value={
+        scenarioIsLoading ? <>Loading...</> : <>{scenarioData?.data?.name}</>
+      } />
       <Title level={5}>{"Status"}</Title>
       <TextField value={record?.status} />
-      <Title level={5}>{"StepId"}</Title>
+      <Title level={5}>{"Step"}</Title>
       <TextField value={record?.stepId} />
-      <Title level={5}>{"UserId"}</Title>
-      <TextField value={record?.userId} />
-      <Title level={5}>{"GroupId"}</Title>
-      <TextField value={record?.groupId} />
-      <Title level={5}>{"TemplateId"}</Title>
-      <TextField value={record?.templateId} />
+      <Title level={5}>{"User"}</Title>
+      <TextField value={
+        userIsLoading ? <>Loading...</> : <>{userData?.data?.email}</>
+      } />
+      <Title level={5}>{"Group"}</Title>
+      <TextField value={
+        groupIsLoading ? <>Loading...</> : <>{groupData?.data?.name}</>
+      } />
+      <Title level={5}>{"Template"}</Title>
+      <TextField value={
+        templateIsLoading ? <>Loading...</> : <>{templateData?.data?.title}</>
+      } />
       <Title level={5}>{"Topic"}</Title>
       <TextField value={record?.topic} />
       <Title level={5}>{"Channel"}</Title>

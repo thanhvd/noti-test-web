@@ -3,8 +3,9 @@ import {
   NumberField,
   Show,
   TextField,
+  useSelect,
 } from "@refinedev/antd";
-import { IResourceComponentsProps, useShow } from "@refinedev/core";
+import { IResourceComponentsProps, useOne, useShow } from "@refinedev/core";
 import { Typography } from "antd";
 import React from "react";
 
@@ -15,6 +16,21 @@ export const StepsShow: React.FC<IResourceComponentsProps> = () => {
   const { data, isLoading } = queryResult;
 
   const record = data?.data;
+  const { data: scenarioData, isLoading: scenarioIsLoading } = useOne({
+    resource: "scenarios",
+    id: record?.id || "",
+    queryOptions: {
+      enabled: !!record,
+    },
+  });
+
+  const { data: templateData, isLoading: templateIsLoading } = useOne({
+    resource: "templates",
+    id: record?.templateId || "",
+    queryOptions: {
+      enabled: !!record,
+    },
+  });
 
   return (
     <Show isLoading={isLoading}>
@@ -26,15 +42,19 @@ export const StepsShow: React.FC<IResourceComponentsProps> = () => {
       <TextField value={record?.deletedAt} />
       <Title level={5}>{"Channel"}</Title>
       <TextField value={record?.channelAvails} />
-      <Title level={5}>{"ScenarioId"}</Title>
-      <TextField value={record?.scenarioId} />
+      <Title level={5}>{"Scenario"}</Title>
+      <TextField value={
+        scenarioIsLoading ? <>Loading...</> : <>{scenarioData?.data?.name}</>
+      } />
       <Title level={5}>{"Priority"}</Title>
       <TextField value={record?.priority} />
-      <Title level={5}>{"TemplateId"}</Title>
-      <TextField value={record?.templateId} />
-      <Title level={5}>{"NextStepId"}</Title>
+      <Title level={5}>{"Template"}</Title>
+      <TextField value={
+        templateIsLoading ? <>Loading...</> : <>{templateData?.data?.title}</>
+      } />
+      <Title level={5}>{"NextStep"}</Title>
       <TextField value={record?.nextStepId} />
-      <Title level={5}>{"PrevStepId"}</Title>
+      <Title level={5}>{"PrevStep"}</Title>
       <TextField value={record?.prevStepId} />
       <Title level={5}>{"ChannelData"}</Title>
       <TextField value={record?.channelData} />

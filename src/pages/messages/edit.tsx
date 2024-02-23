@@ -1,4 +1,4 @@
-import { Edit, useForm } from "@refinedev/antd";
+import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { IResourceComponentsProps } from "@refinedev/core";
 import { Form, Input, Select } from "antd";
 import React from "react";
@@ -6,6 +6,22 @@ import React from "react";
 export const MessagesEdit: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, formLoading } = useForm({});
 
+  const { selectProps: scenarioSelectProps } = useSelect({
+    resource: "scenarios",
+    optionLabel: "name"
+  })
+  const { selectProps: userSelectProps } = useSelect({
+    resource: "users",
+    optionLabel: "email"
+  })
+  const { selectProps: groupSelectProps } = useSelect({
+    resource: "groupUsers",
+    optionLabel: "name"
+  })
+  const { selectProps: templateSelectProps } = useSelect({
+    resource: "templates",
+    optionLabel: "title"
+  })
   return (
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
       <Form {...formProps} layout="vertical">
@@ -13,7 +29,7 @@ export const MessagesEdit: React.FC<IResourceComponentsProps> = () => {
           label={"Scenario"}
           name={["scenarioId"]}
         >
-          <Input />
+          <Select {...scenarioSelectProps} />
         </Form.Item>
         <Form.Item
           label={"Status"}
@@ -31,19 +47,19 @@ export const MessagesEdit: React.FC<IResourceComponentsProps> = () => {
           label={"User"}
           name={["userId"]}
         >
-          <Input />
+          <Select {...userSelectProps} />
         </Form.Item>
         <Form.Item
           label={"Group"}
           name={["groupId"]}
         >
-          <Input />
+          <Select {...groupSelectProps} />
         </Form.Item>
         <Form.Item
           label={"Template"}
           name={["templateId"]}
         >
-          <Input />
+          <Select {...templateSelectProps} />
         </Form.Item>
         <Form.Item
           label={"Topic"}
