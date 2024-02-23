@@ -7,13 +7,24 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { BaseRecord, IResourceComponentsProps } from "@refinedev/core";
+import { BaseRecord, IResourceComponentsProps, useMany } from "@refinedev/core";
 import { Space, Table } from "antd";
 import React from "react";
 
 export const StepsList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
+  });
+
+  const { data: templateData, isLoading: templateIsLoading } = useMany({
+    resource: "templates",
+    ids:
+      tableProps?.dataSource
+        ?.map((item) => item?.templateId)
+        .filter(Boolean) ?? [],
+    queryOptions: {
+      enabled: !!tableProps?.dataSource,
+    },
   });
 
   return (
@@ -37,9 +48,18 @@ export const StepsList: React.FC<IResourceComponentsProps> = () => {
         />
         <Table.Column dataIndex="channel" title={"Channel"} />
         <Table.Column dataIndex="priority" title={"Priority"} />
-        <Table.Column dataIndex="templateId" title={"TemplateId"} />
-        <Table.Column dataIndex="nextStepId" title={"NextStepId"} />
-        <Table.Column dataIndex="prevStepId" title={"PrevStepId"} />
+        <Table.Column
+          dataIndex="templateId"
+          title={"Template"}
+          render={(value) =>
+            templateIsLoading ? (
+              <>Loading...</>
+            ) : (
+              templateData?.data?.find((item) => item.id === value)?.title
+            )
+          } />
+        <Table.Column dataIndex="nextStepId" title={"NextStep"} />
+        <Table.Column dataIndex="prevStepId" title={"PrevStep"} />
         <Table.Column dataIndex="channelData" title={"ChannelData"} />
         <Table.Column dataIndex="numberRetry" title={"NumberRetry"} />
         <Table.Column dataIndex="delayRetryHour" title={"DelayRetryHour"} />

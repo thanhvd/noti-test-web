@@ -9,8 +9,8 @@ export const MessagesEdit: React.FC<IResourceComponentsProps> = () => {
   return (
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
       <Form {...formProps} layout="vertical">
-      <Form.Item
-          label={"ScenarioId"}
+        <Form.Item
+          label={"Scenario"}
           name={["scenarioId"]}
         >
           <Input />
@@ -22,25 +22,25 @@ export const MessagesEdit: React.FC<IResourceComponentsProps> = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"StepId"}
+          label={"Step"}
           name={["stepId"]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label={"SserId"}
+          label={"User"}
           name={["userId"]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label={"GroupId"}
+          label={"Group"}
           name={["groupId"]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label={"TemplateId"}
+          label={"Template"}
           name={["templateId"]}
         >
           <Input />

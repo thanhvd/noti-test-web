@@ -13,40 +13,36 @@ export const TemplateCreate: React.FC<IResourceComponentsProps> = () => {
         <Form.Item
           label={"Channel"}
           name={["channel"]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label={"Title"}
-          name={["title"]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label={"Content"}
-          name={["content"]}
-        >
-          <Input />
-        </Form.Item>
-        {/* <Form.Item
-          label={"Topic"}
-          name={["topic"]}
-          initialValue={"active"}
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Select
-            defaultValue={"active"}
-            options={[
-              { value: "active", label: "Active" },
-              { value: "inactive", label: "Inactive" },
-            ]}
-            style={{ width: 120 }}
-          />
-        </Form.Item> */}
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label={"Title"}
+          name={["title"]}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label={"Content"}
+          name={["content"]}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
       </Form>
     </Create>
   );

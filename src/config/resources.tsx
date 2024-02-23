@@ -99,7 +99,6 @@ export const resources: IResourceItem[] = [
     edit: "/steps/edit/:id",
     show: "/steps/show/:id",
     meta: {
-
       canDelete: true,
     },
   },
