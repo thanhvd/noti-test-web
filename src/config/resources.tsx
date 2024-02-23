@@ -30,15 +30,15 @@ export const resources: IResourceItem[] = [
       canDelete: true,
     },
   },
-  {
-    name: "steps",
-    list: "/scenarios/config/:id",
-    create: "/scenarios/config/:id/create",
-    edit: "/scenarios/config/:id/edit/:id",
-    meta: {
-      hide: true
-    },
-  },
+  // {
+  //   name: "steps",
+  //   list: "/scenarios/config/:id",
+  //   create: "/scenarios/config/:id/create",
+  //   edit: "/scenarios/config/:id/edit/:id",
+  //   meta: {
+  //     hide: true
+  //   },
+  // },
   {
     name: "stepStages",
     create: "/scenarios/config/:id/stages/create",
@@ -92,6 +92,29 @@ export const resources: IResourceItem[] = [
       canDelete: true,
     },
   },
+  {
+    name: "steps",
+    list: "/steps",
+    create: "/steps/create",
+    edit: "/steps/edit/:id",
+    show: "/steps/show/:id",
+    meta: {
+
+      canDelete: true,
+    },
+  },
+  {
+    name: "messages",
+    list: "/messages",
+    create: "/messages/create",
+    edit: "/messages/edit/:id",
+    show: "/messages/show/:id",
+    meta: {
+      label: "Messages",
+      canDelete: true,
+    },
+  },
+
   // {
   //   name: "scrumboard",
   //   meta: {

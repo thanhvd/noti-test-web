@@ -11,6 +11,18 @@
       "status": "active",
       "username": "thanh",
       "deviceType": "mobile"
+    },
+    {
+      "id": 2,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "email": "thanh@test.com",
+      "password": "123456",
+      "phoneNumber": "0394244222",
+      "status": "active",
+      "username": "thanh",
+      "deviceType": "mobile"
     }
   ],
   "groupUsers": [
@@ -22,12 +34,6 @@
       "name": "groupThanh",
       "topic": "topicMobile",
       "channelAvails": "channelAvailsDemo"
-    },
-    {
-      "name": "Son2fasdfasdf",
-      "topic": "Topic Demo 1",
-      "channelAvails": "Channel Demo",
-      "id": 2
     }
   ],
   "groupDetails": [

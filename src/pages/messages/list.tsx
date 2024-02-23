@@ -7,29 +7,14 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { BaseRecord, IResourceComponentsProps, useList, useMany } from "@refinedev/core";
+import { BaseRecord, IResourceComponentsProps } from "@refinedev/core";
 import { Space, Table } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 
-export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
+export const MessagesList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
-
-  const { data: groupDetails } = useList({
-    resource: "groupDetails",
-  });
-
-  console.log("GR DETAIL: ", groupDetails?.data)
-
-  // const { data: users } = useMany({
-  //   resource: "users",
-  //   ids: groupDetails?.data.map((groupDetail) => groupDetail.userId),
-  //   queryOptions: {
-  //     enabled: groupDetails!.length > 0,
-  //   },
-  // });
-
 
   return (
     <List>
@@ -50,9 +35,22 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
           title={"Updated At"}
           render={(value: any) => <DateField value={value} />}
         />
-        <Table.Column dataIndex="name" title={"Name"} />
+        <Table.Column dataIndex="scenarioId" title={"ScenarioId"} />
+        <Table.Column dataIndex="status" title={"Status"} />
+        <Table.Column dataIndex="stepId" title={"StepId"} />
+        <Table.Column dataIndex="userId" title={"UserId"} />
+        <Table.Column dataIndex="groupId" title={"GroupId"} />
+        <Table.Column dataIndex="templateId" title={"TemplateId"} />
         <Table.Column dataIndex="topic" title={"Topic"} />
-        <Table.Column dataIndex="channelAvails" title={"Channel Available"} />
+        <Table.Column dataIndex="channel" title={"Channel"} />
+        <Table.Column
+          dataIndex={["sentTime"]}
+          title={"SentTime"}
+          render={(value: any) => <DateField value={value} />}
+        />
+        <Table.Column dataIndex="sentBy" title={"SentBy"} />
+        <Table.Column dataIndex="reasonFail" title={"ReasonFail"} />
+
 
         <Table.Column
           title={"Actions"}

@@ -41,6 +41,8 @@ import { KanbanEditStage } from "@/pages/scenario-config/edit-stage";
 import { GroupUserCreate, GroupUserEdit, GroupUserList, GroupUserShow } from "@/pages/group-users";
 import { TemplateCreate, TemplateEdit, TemplateList, TemplateShow } from "@/pages/template";
 import { EmailVendorsCreate, EmailVendorsEdit, EmailVendorsList, EmailVendorsShow } from "@/pages/email-vendors";
+import { MessagesCreate, MessagesEdit, MessagesList, MessagesShow } from "@/pages/messages";
+import { StepsCreate, StepsEdit, StepsList, StepsShow } from "@/pages/steps";
 
 function AppRouter() {
   return (
@@ -90,6 +92,20 @@ function AppRouter() {
           <Route path="create" element={<EmailVendorsCreate />} />
           <Route path="edit/:id" element={<EmailVendorsEdit />} />
           <Route path="show/:id" element={<EmailVendorsShow />} />
+        </Route>
+
+        <Route path="/messages">
+          <Route index element={<MessagesList />} />
+          <Route path="create" element={<MessagesCreate />} />
+          <Route path="edit/:id" element={<MessagesEdit />} />
+          <Route path="show/:id" element={<MessagesShow />} />
+        </Route>
+
+        <Route path="/steps">
+          <Route index element={<StepsList />} />
+          <Route path="create" element={<StepsCreate />} />
+          <Route path="edit/:id" element={<StepsEdit />} />
+          <Route path="show/:id" element={<StepsShow />} />
         </Route>
 
         <Route path="/scenarios">
