@@ -81,7 +81,7 @@ export const dataProvider = (
     );
 
     return {
-      data: data.data
+      data: _.isArray(data.data) ? data.data : data.data?.data,
     };
   },
 

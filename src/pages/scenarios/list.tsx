@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DATETIME_FORMAT, DATE_FORMAT } from "@/utilities";
+import React from "react";
 import { ScheduleOutlined } from "@ant-design/icons";
 import {
   DateField,
@@ -11,7 +11,7 @@ import {
 } from "@refinedev/antd";
 import { BaseRecord, IResourceComponentsProps, useLink, useMany } from "@refinedev/core";
 import { Button, Space, Table } from "antd";
-import React from "react";
+import { DATETIME_FORMAT, DATE_FORMAT } from "@/utilities";
 
 export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
@@ -19,27 +19,32 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
   });
   const Link = useLink();
 
+  console.log("tableProps?.dataSource", !!tableProps?.dataSource)
+
   const { data: groupData, isLoading: groupIsLoading } = useMany({
-    resource: "groupUsers",
+    resource: "group",
     ids:
       tableProps?.dataSource
         ?.map((item) => item?.groupId)
         .filter(Boolean) ?? [],
     queryOptions: {
-      enabled: !!tableProps?.dataSource,
+      enabled: !!tableProps?.dataSource?.length,
     },
   });
 
   const { data: userData, isLoading: userIsLoading } = useMany({
-    resource: "users",
+    resource: "user",
     ids:
       tableProps?.dataSource
         ?.map((item) => item?.userId)
         .filter(Boolean) ?? [],
     queryOptions: {
-      enabled: !!tableProps?.dataSource,
+      enabled: !!tableProps?.dataSource?.length,
     },
   });
+
+  console.log("userData", userData)
+  console.log("groupData", groupData)
 
   return (
     <List>
@@ -67,6 +72,21 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
               userData?.data?.find((item) => item.id === value)?.email
             )
           }
+        />
+
+        <Table.Column
+          title={"Statistics"}
+          dataIndex="statistics"
+          render={(_, record: BaseRecord) => (
+            <div style={{ fontSize: 12 }}>
+              {`Email:  ${record.successEmail}`}
+              <br />
+              {`Notification:  ${record.successPush}`}
+              <br />
+              {`SMS:  ${record.successSMS}`}
+              <br />
+            </div>
+          )}
         />
         <Table.Column
           dataIndex={["startTime"]}

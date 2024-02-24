@@ -17,6 +17,8 @@ export const BlogPostEdit: React.FC<IResourceComponentsProps> = () => {
     },
   });
 
+  console.log("formProps", formProps)
+
   return (
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
       <Form {...formProps} layout="vertical">

@@ -1,13 +1,12 @@
 import type { IResourceItem } from "@refinedev/core";
 
 import {
-  CalendarOutlined,
-  ContainerOutlined,
-  CrownOutlined,
+  AuditOutlined,
+  ClusterOutlined,
   DashboardOutlined,
-  ProjectOutlined,
-  ShopOutlined,
-  TeamOutlined,
+  PicRightOutlined,
+  UserOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 
 export const resources: IResourceItem[] = [
@@ -28,6 +27,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Scenarios",
       canDelete: true,
+      icon: <ClusterOutlined />,
     },
   },
   // {
@@ -57,6 +57,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Users",
       canDelete: true,
+      icon: <UserOutlined />
     },
   },
   {
@@ -68,6 +69,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Group Users",
       canDelete: true,
+      icon: <UsergroupAddOutlined />
     },
   },
   {
@@ -79,6 +81,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Templates",
       canDelete: true,
+      icon: <PicRightOutlined />
     },
   },
   {
@@ -90,6 +93,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Email Vendors",
       canDelete: true,
+      icon: <AuditOutlined />
     },
   },
   {
@@ -100,6 +104,7 @@ export const resources: IResourceItem[] = [
     show: "/steps/show/:id",
     meta: {
       canDelete: true,
+      hide: true
     },
   },
   {
@@ -111,55 +116,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Messages",
       canDelete: true,
+      hide: true
     },
   },
-
-  // {
-  //   name: "scrumboard",
-  //   meta: {
-  //     label: "Scrumboard",
-  //     icon: <ProjectOutlined />,
-  //   },
-  // },
-  // {
-  //   name: "tasks",
-  //   list: "/scrumboard/kanban",
-  //   create: "/scrumboard/kanban/create",
-  //   edit: "/scrumboard/kanban/edit/:id",
-  //   meta: {
-  //     label: "Project Kanban",
-  //     parent: "scrumboard",
-  //   },
-  // },
-  // {
-  //   name: "taskStages",
-  //   create: "/scrumboard/kanban/stages/create",
-  //   edit: "/scrumboard/kanban/stages/edit/:id",
-  //   list: "/scrumboard/kanban",
-  //   meta: {
-  //     hide: true,
-  //   },
-  // },
-  // {
-  //   name: "companies",
-  //   list: "/companies",
-  //   show: "/companies/:id",
-  //   create: "/companies/create",
-  //   edit: "/companies/edit/:id",
-  //   meta: {
-  //     label: "Report",
-  //     icon: <ShopOutlined />,
-  //   },
-  // },
-  // {
-  //   name: "contacts",
-  //   list: "/contacts",
-  //   create: "/contacts/create",
-  //   edit: "/contacts/edit/:id",
-  //   show: "/contacts/show/:id",
-  //   meta: {
-  //     label: "Push Notification",
-  //     icon: <TeamOutlined />,
-  //   },
-  // },
 ];
