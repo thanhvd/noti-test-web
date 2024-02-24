@@ -20,7 +20,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "scenarios",
+    name: "scenario",
     list: "/scenarios",
     create: "/scenarios/create",
     edit: "/scenarios/edit/:id",
@@ -60,7 +60,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "groupUsers",
+    name: "group",
     list: "/group-users",
     create: "/group-users/create",
     edit: "/group-users/edit/:id",
@@ -93,7 +93,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "steps",
+    name: "step",
     list: "/steps",
     create: "/steps/create",
     edit: "/steps/edit/:id",
@@ -103,7 +103,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "messages",
+    name: "message",
     list: "/messages",
     create: "/messages/create",
     edit: "/messages/edit/:id",
