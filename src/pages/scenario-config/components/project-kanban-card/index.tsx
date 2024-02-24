@@ -31,10 +31,10 @@ import { User } from "@/graphql/schema.types";
 import { getDateColor } from "@/utilities";
 import { DateField, NumberField, Show, TextField } from "@refinedev/antd";
 import styles from "./index.module.css";
-import favIcon from "../../../../../public/211694_bell_icon.png"
-import transfIcon from "../../../../../public/compute-trans.png"
-import roundtransIcon from "../../../../../public/circle-arrow-icon.png"
-import clockIcon from "../../../../../public/clock.png"
+import favIcon from "@/assets/211694_bell_icon.png"
+import transfIcon from "@/assets/compute-trans.png"
+import roundtransIcon from "@/assets/circle-arrow-icon.png"
+import clockIcon from "@/assets/clock.png"
 
 // const { Text } = Typography;
 
