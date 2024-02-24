@@ -49,7 +49,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "users",
+    name: "user",
     list: "/users",
     create: "/users/create",
     edit: "/users/edit/:id",
@@ -71,7 +71,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "templates",
+    name: "template",
     list: "/template",
     create: "/template/create",
     edit: "/template/edit/:id",
@@ -82,7 +82,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "emailVendors",
+    name: "email/vendor",
     list: "/email-vendors",
     create: "/email-vendors/create",
     edit: "/email-vendors/edit/:id",

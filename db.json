@@ -63,10 +63,310 @@
       "content": "contentDemo"
     },
     {
-      "channel": "sdasd",
-      "title": "sdw",
-      "content": "dwqdqwd",
-      "id": 2
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-02-22T00:00:00.000Z",
+      "deletedAt": null,
+      "updatedAt": "2024-02-22T00:00:00.000Z",
+      "channel": "channelThanh",
+      "title": "titleMobile",
+      "content": "contentDemo"
     }
   ],
   "emailVendors": [
