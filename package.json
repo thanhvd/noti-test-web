@@ -21,6 +21,7 @@
     "dayjs": "^1.11.10",
     "graphql-tag": "^2.12.6",
     "json-server": "^0.17.4",
+    "lodash": "^4.17.21",
     "query-string": "^8.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

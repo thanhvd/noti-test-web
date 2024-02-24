@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 import { DataProvider } from "@refinedev/core";
 import queryString from "query-string";
+import _ from "lodash"
 import { generateFilter, generateSort } from '@/utilities/data-provider';
 
 const axiosInstance = axios.create();
@@ -65,8 +66,8 @@ export const dataProvider = (
     const { data } = await httpClient[requestMethod](urlWithQuery, { headers });
 
     return {
-      data: data.data,
-      total: data.meta?.total || data.data?.length,
+      data: _.isArray(data.data) ? data.data : data.data?.data,
+      total: data.meta?.total || data.data?.total_elements || data.data?.length,
     };
   },
 
