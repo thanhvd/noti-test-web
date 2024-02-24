@@ -35,6 +35,10 @@ import ReverseIcon from "@/components/icon/ReverseIcon";
 import ClockIcon from "@/components/icon/ClockIcon";
 import CollorBellIcon from "@/components/icon/ColorBellIcon";
 import ComputerTransfer from "@/components/icon/ComputerTransferIcon";
+import favIcon from "@/assets/211694_bell_icon.png"
+import transfIcon from "@/assets/compute-trans.png"
+import roundtransIcon from "@/assets/circle-arrow-icon.png"
+import clockIcon from "@/assets/clock.png"
 
 
 // const { Text } = Typography;

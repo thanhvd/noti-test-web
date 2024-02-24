@@ -1,13 +1,12 @@
 import type { IResourceItem } from "@refinedev/core";
 
 import {
-  CalendarOutlined,
-  ContainerOutlined,
-  CrownOutlined,
+  AuditOutlined,
+  ClusterOutlined,
   DashboardOutlined,
-  ProjectOutlined,
-  ShopOutlined,
-  TeamOutlined,
+  PicRightOutlined,
+  UserOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 
 export const resources: IResourceItem[] = [
@@ -20,7 +19,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "scenarios",
+    name: "scenario",
     list: "/scenarios",
     create: "/scenarios/create",
     edit: "/scenarios/edit/:id",
@@ -28,6 +27,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Scenarios",
       canDelete: true,
+      icon: <ClusterOutlined />,
     },
   },
   // {
@@ -49,7 +49,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "users",
+    name: "user",
     list: "/users",
     create: "/users/create",
     edit: "/users/edit/:id",
@@ -57,10 +57,11 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Users",
       canDelete: true,
+      icon: <UserOutlined />
     },
   },
   {
-    name: "groupUsers",
+    name: "group",
     list: "/group-users",
     create: "/group-users/create",
     edit: "/group-users/edit/:id",
@@ -68,10 +69,11 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Group Users",
       canDelete: true,
+      icon: <UsergroupAddOutlined />
     },
   },
   {
-    name: "templates",
+    name: "template",
     list: "/template",
     create: "/template/create",
     edit: "/template/edit/:id",
@@ -79,10 +81,11 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Templates",
       canDelete: true,
+      icon: <PicRightOutlined />
     },
   },
   {
-    name: "emailVendors",
+    name: "email/vendor",
     list: "/email-vendors",
     create: "/email-vendors/create",
     edit: "/email-vendors/edit/:id",
@@ -90,20 +93,22 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Email Vendors",
       canDelete: true,
+      icon: <AuditOutlined />
     },
   },
   {
-    name: "steps",
+    name: "step",
     list: "/steps",
     create: "/steps/create",
     edit: "/steps/edit/:id",
     show: "/steps/show/:id",
     meta: {
       canDelete: true,
+      hide: true
     },
   },
   {
-    name: "messages",
+    name: "message",
     list: "/messages",
     create: "/messages/create",
     edit: "/messages/edit/:id",
@@ -111,55 +116,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Messages",
       canDelete: true,
+      hide: true
     },
   },
-
-  // {
-  //   name: "scrumboard",
-  //   meta: {
-  //     label: "Scrumboard",
-  //     icon: <ProjectOutlined />,
-  //   },
-  // },
-  // {
-  //   name: "tasks",
-  //   list: "/scrumboard/kanban",
-  //   create: "/scrumboard/kanban/create",
-  //   edit: "/scrumboard/kanban/edit/:id",
-  //   meta: {
-  //     label: "Project Kanban",
-  //     parent: "scrumboard",
-  //   },
-  // },
-  // {
-  //   name: "taskStages",
-  //   create: "/scrumboard/kanban/stages/create",
-  //   edit: "/scrumboard/kanban/stages/edit/:id",
-  //   list: "/scrumboard/kanban",
-  //   meta: {
-  //     hide: true,
-  //   },
-  // },
-  // {
-  //   name: "companies",
-  //   list: "/companies",
-  //   show: "/companies/:id",
-  //   create: "/companies/create",
-  //   edit: "/companies/edit/:id",
-  //   meta: {
-  //     label: "Report",
-  //     icon: <ShopOutlined />,
-  //   },
-  // },
-  // {
-  //   name: "contacts",
-  //   list: "/contacts",
-  //   create: "/contacts/create",
-  //   edit: "/contacts/edit/:id",
-  //   show: "/contacts/show/:id",
-  //   meta: {
-  //     label: "Push Notification",
-  //     icon: <TeamOutlined />,
-  //   },
-  // },
 ];
