@@ -1,13 +1,10 @@
-import { memo, useMemo } from "react";
+import { memo, useMemo, useState } from "react";
 
 import { useDelete, useNavigation } from "@refinedev/core";
 
 import {
-    CheckSquareOutlined,
-    ClockCircleOutlined,
     DeleteOutlined,
     EyeOutlined,
-    MessageOutlined,
     MoreOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
@@ -16,45 +13,31 @@ import {
     Card,
     ConfigProvider,
     Dropdown,
-    Image,
+    Modal,
     Skeleton,
     Space,
-    Tag,
     theme,
-    Tooltip,
-    Typography,
 } from "antd";
 import dayjs from "dayjs";
 
-import { CustomAvatar, Text, TextIcon } from "@/components";
+import { Text } from "@/components";
 import { User } from "@/graphql/schema.types";
 import { getDateColor } from "@/utilities";
-import { DateField, NumberField, Show, TextField } from "@refinedev/antd";
+import { TextField } from "@refinedev/antd";
 import styles from "./index.module.css";
-import favIcon from "../../../../../public/211694_bell_icon.png"
-import transfIcon from "../../../../../public/compute-trans.png"
-import roundtransIcon from "../../../../../public/circle-arrow-icon.png"
-import clockIcon from "../../../../../public/clock.png"
+import { EditMessageCard } from "../kanban-card-item/EditMessageCard";
+import { EditEmailCard } from "../kanban-card-item/EditEmailCard";
+import { EditResponseTime } from "../kanban-card-item/EditResponseTime";
+import { EditRetryTime } from "../kanban-card-item/EditRetryTime";
+import { EditStart } from "../kanban-card-item/EditStart";
+import EditIcon from "@/components/icon/EditIcon";
+import ReverseIcon from "@/components/icon/ReverseIcon";
+import ClockIcon from "@/components/icon/ClockIcon";
+import CollorBellIcon from "@/components/icon/ColorBellIcon";
+import ComputerTransfer from "@/components/icon/ComputerTransferIcon";
+
 
 // const { Text } = Typography;
-
-type ProjectCardProps = {
-    id: string;
-    title: string;
-    comments: {
-        totalCount: number;
-    };
-    dueDate?: string;
-    users?: {
-        id: string;
-        name: string;
-        avatarUrl?: User["avatarUrl"];
-    }[];
-    checkList?: {
-        title: string;
-        checked: boolean;
-    }[];
-};
 
 export const ProjectCard = ({
     id,
@@ -69,6 +52,38 @@ export const ProjectCard = ({
     const { token } = theme.useToken();
     const { edit } = useNavigation();
     const { mutate } = useDelete();
+    const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
+    const [isMailModalOpen, setIsMailModalOpen] = useState(false);
+    const [isResponseTimeModalOpen, setIsResponseTimeModalOpen] = useState(false);
+    const [isRetryModalOpen, setIsRetryModalOpen] = useState(false);
+
+    const showMessageModal = () => {
+        setIsMessageModalOpen(true);
+    };
+    const showMailModal = () => {
+        setIsMailModalOpen(true);
+    };
+    const showResponseTimeModal = () => {
+        setIsResponseTimeModalOpen(true);
+    };
+    const showRetryModal = () => {
+        setIsRetryModalOpen(true);
+    };
+
+
+    const handleOk = () => {
+        setIsMessageModalOpen(false);
+        setIsMailModalOpen(false);
+        setIsResponseTimeModalOpen(false);
+        setIsRetryModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsMessageModalOpen(false);
+        setIsMailModalOpen(false);
+        setIsResponseTimeModalOpen(false);
+        setIsRetryModalOpen(false);
+    };
 
     const dropdownItems = useMemo(() => {
         const dropdownItems: MenuProps["items"] = [
@@ -152,9 +167,6 @@ export const ProjectCard = ({
                 className={styles.container}
                 size="default"
                 title={<Text ellipsis={{ tooltip: channel }}>{channel}</Text>}
-                onClick={() => {
-                    edit("steps", id, "replace");
-                }}
                 extra={
                     <Dropdown
                         trigger={["click"]}
@@ -191,17 +203,20 @@ export const ProjectCard = ({
                 }
             >
                 <Space direction="vertical">
-                    <Image width={40} height={40} src={favIcon} />
-                    <Text size="xl" className={styles.text} >Gửi đến:</Text>
+                    <CollorBellIcon style={{ alignSelf: "center" }} width={40} height={40} />
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <Text size="xl" className={styles.text} >Gửi đến:</Text>
+                        <EditIcon onClick={showMailModal} width={25} height={25} />
+                    </div>
                     <Text size="xl" className={styles.title}>Chương trình lì xì tết đầu năm</Text>
                     <Text size="xs" className={styles.content}>he he hh eheh eh eh eh e he he he heho ho oho ho ho hoho fdo dofh odfho dfho dfoh dfoh odf odf odfho dfoh dfoh dfo hdfoh odfho dfho dfoh dofh </Text>
-                    <Text size="sm" className={styles.editMessage}>Edit message</Text>
+                    <Text size="sm" className={styles.editMessage} onClick={showMessageModal}>Edit message</Text>
                     <div className={styles.timeContainer}>
                         <div className={styles.timeItem}>
-                            <Image width={20} height={20} src={transfIcon}></Image>
+                            <ComputerTransfer style={{ alignSelf: "center" }} width={25} height={25} />
                         </div>
                         <div className={styles.timeItem}>
-                            <Image width={20} height={20} src={roundtransIcon} />
+                            <ReverseIcon style={{ alignSelf: "center" }} width={25} height={25} onClick={showRetryModal} />
                             <div className={styles.smallTimeItem}>
                                 <TextField value={data?.delayRetryHour} />h
                             </div>
@@ -214,7 +229,7 @@ export const ProjectCard = ({
                         </div>
 
                         <div className={styles.timeItem}>
-                            <Image width={25} height={25} src={clockIcon} />
+                            <ClockIcon style={{ alignSelf: "center" }} width={25} height={25} onClick={showResponseTimeModal} />
                             <div className={styles.smallTimeItem}>
                                 <TextField value={data?.responseTimeHour} />h
                             </div>
@@ -359,6 +374,19 @@ export const ProjectCard = ({
                 </div> */}
                 </Space>
             </Card>
+            <Modal open={isMessageModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <EditMessageCard />
+            </Modal>
+            <Modal open={isMailModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <EditEmailCard />
+            </Modal>
+            <Modal open={isResponseTimeModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <EditResponseTime />
+            </Modal>
+            <Modal open={isRetryModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <EditRetryTime />
+            </Modal>
+
         </ConfigProvider>
     );
 };

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import PlayIcon from "@/components/icon/PlayIcon";
 import { DATETIME_FORMAT, DATE_FORMAT } from "@/utilities";
 import { ScheduleOutlined } from "@ant-design/icons";
 import {
@@ -10,10 +11,12 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { BaseRecord, IResourceComponentsProps, useLink, useMany } from "@refinedev/core";
-import { Button, Space, Table } from "antd";
-import React from "react";
+import { Button, Modal, Space, Table } from "antd";
+import React, { useState } from "react";
+import { EditStart } from "../scenario-config/components/kanban-card-item/EditStart";
 
 export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
+  const [isStartModalOpen, setIsStartModalOpen] = useState(false);
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
@@ -40,6 +43,18 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
       enabled: !!tableProps?.dataSource,
     },
   });
+
+  const showStartModal = () => {
+    setIsStartModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsStartModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsStartModalOpen(false);
+  };
 
   return (
     <List>
@@ -89,11 +104,17 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
               </Link>
               <EditButton hideText size="small" recordItemId={record.id} />
               <ShowButton hideText size="small" recordItemId={record.id} />
+              <Button size="small"><PlayIcon style={{ marginTop: "4px" }} width={10} height={15} onClick={showStartModal} /></Button>
               <DeleteButton hideText size="small" recordItemId={record.id} />
+
             </Space>
           )}
         />
       </Table>
+      <Modal open={isStartModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <EditStart />
+      </Modal>
     </List>
+
   );
 };
