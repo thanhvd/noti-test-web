@@ -20,6 +20,7 @@ const { Title } = Typography;
 export const EditMessageCard: FC<any> = ({ stepData, setStepData }) => {
     return (
         <Space direction="vertical" style={{ display: "flex", justifyContent: "center" }}>
+            
             <Title level={5}>{"Title message"}</Title>
             <Input className={styles.input} placeholder="Add text" />
             <Title level={5}>{"Content message"} </Title>
