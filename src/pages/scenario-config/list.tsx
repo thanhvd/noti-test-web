@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC, PropsWithChildren, useMemo } from "react";
-
+import _ from "lodash"
 import {
   HttpError,
   useCustom,
@@ -48,63 +48,19 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     // },
   } = useParsed();
 
+  const scenarioData = useCustom({
+    url: `${NOTIAPI_URL}/scenario/${id}/detail`,
+    method: 'get'
+  })
+  const scenario = scenarioData.data?.data?.data
   const data = useCustom({
     url: `${NOTIAPI_URL}/scenario/${id}/step/list`,
     method: 'get'
   })
 
-  console.log("data", data)
-
-  // const { data: stages, isLoading: isLoadingStages } = useList<TaskStage>({
-  //   resource: "stages",
-  //   filters: [
-  //     {
-  //       field: "scenarioId",
-  //       operator: "eq",
-  //       value: id,
-  //     },
-  //   ],
-  //   pagination: {
-  //     mode: "off",
-  //   },
-  //   sorters: [
-  //     {
-  //       field: "createdAt",
-  //       order: "asc",
-  //     },
-  //   ],
-  //   queryOptions: {
-
-  //   }
-  // });
-
-  // const { data: steps, isLoading: isLoadingTasks } = useList<any>({
-  //   resource: "step",
-  //   // sorters: [
-  //   //   {
-  //   //     field: "dueDate",
-  //   //     order: "asc",
-  //   //   },
-  //   // ],
-  //   filters: [
-  //     {
-  //       field: "scenarioId",
-  //       operator: "eq",
-  //       value: id,
-  //     },
-  //   ],
-  //   queryOptions: {
-  //     enabled: true,
-  //   },
-  //   pagination: {
-  //     mode: "off",
-  //   },
-  //   meta: {
-  //     // gqlQuery: KANBAN_TASKS_QUERY,
-  //   },
-  // });
-  const steps: any[] = []
-  const groups = steps.reduce((previousValue, currentStep) => {
+  const steps = data?.data?.data?.data || []
+  console.log("steps", steps)
+  let groups = steps.reduce((previousValue: any, currentStep: any) => {
     const isExistGroup = previousValue.find((s: any) => s.id === currentStep.groupCode)
     console.log("isExistGroup", isExistGroup)
     return isExistGroup ? previousValue : [...previousValue, {
@@ -113,9 +69,19 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
       steps: []
     }]
   }, []) || []
+  groups = _.sortBy(groups, [function (o) { return o.id; }]);
 
   // const initTasks = steps?.data.filter((task: any) => !task.prevStepId) || []
-  const stages = [...groups, { id: groups.length + 1, title: `Group ${groups.length + 1}`, steps: [{}] }]
+  const newGroupCode = `${scenario?.name}-${groups.length + 1}`
+  const newGroupName = `${scenario?.name}-${groups.length + 1}`
+  const stages = [
+    ...groups,
+    {
+      id: newGroupCode,
+      title: newGroupName,
+      steps: [{}]
+    }
+  ]
 
   // const { mutate: updateTask } = useUpdate<
   //     Task,
@@ -190,38 +156,38 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     // });
   };
 
-  const getContextMenuItems = (column: any) => {
-    const hasItems = column.steps.length > 0;
+  // const getContextMenuItems = (column: any) => {
+  //   const hasItems = column.steps.length > 0;
 
-    const items: MenuProps["items"] = [
-      {
-        label: "Edit status",
-        key: "1",
-        icon: <EditOutlined />,
-        onClick: () => handleEditStage({ stageId: column.id }),
-      },
-      {
-        label: "Clear all cards",
-        key: "2",
-        icon: <ClearOutlined />,
-        disabled: !hasItems,
-        onClick: () =>
-          handleClearCards({
-            taskIds: column.steps.map((task: any) => task.id),
-          }),
-      },
-      {
-        danger: true,
-        label: "Delete status",
-        key: "3",
-        icon: <DeleteOutlined />,
-        disabled: hasItems,
-        onClick: () => handleDeleteStage({ stageId: column.id }),
-      },
-    ];
+  //   const items: MenuProps["items"] = [
+  //     {
+  //       label: "Edit status",
+  //       key: "1",
+  //       icon: <EditOutlined />,
+  //       onClick: () => handleEditStage({ stageId: column.id }),
+  //     },
+  //     {
+  //       label: "Clear all cards",
+  //       key: "2",
+  //       icon: <ClearOutlined />,
+  //       disabled: !hasItems,
+  //       onClick: () =>
+  //         handleClearCards({
+  //           taskIds: column.steps.map((task: any) => task.id),
+  //         }),
+  //     },
+  //     {
+  //       danger: true,
+  //       label: "Delete status",
+  //       key: "3",
+  //       icon: <DeleteOutlined />,
+  //       disabled: hasItems,
+  //       onClick: () => handleDeleteStage({ stageId: column.id }),
+  //     },
+  //   ];
 
-    return items;
-  };
+  //   return items;
+  // };
 
 
   const isLoading = false //isLoadingTasks || isLoadingStages;
@@ -232,7 +198,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     <>
       <KanbanBoard onDragEnd={handleOnDragEnd}>
         {stages.map((column) => {
-          const contextMenuItems = getContextMenuItems(column);
+          // const contextMenuItems = getContextMenuItems(column);
 
           return (
             <KanbanColumn
@@ -240,7 +206,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
               id={column.id}
               title={column.title}
               count={column.steps.length}
-              contextMenuItems={contextMenuItems}
+              // contextMenuItems={contextMenuItems}
               onAddClick={() =>
                 handleAddCard({ stageId: column.id })
               }

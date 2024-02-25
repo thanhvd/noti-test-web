@@ -28,15 +28,15 @@ export const resources: IResourceItem[] = [
       icon: <ClusterOutlined />,
     },
   },
-  // {
-  //   name: "steps",
-  //   list: "/scenarios/config/:id",
-  //   create: "/scenarios/config/:id/create",
-  //   edit: "/scenarios/config/:id/edit/:id",
-  //   meta: {
-  //     hide: true
-  //   },
-  // },
+  {
+    name: "steps",
+    list: "/scenarios/config/:id",
+    create: "/scenarios/config/:id/create",
+    edit: "/scenarios/config/:id/edit/:id",
+    meta: {
+      hide: true
+    },
+  },
   {
     name: "stepStages",
     create: "/scenarios/config/:id/stages/create",
@@ -94,17 +94,17 @@ export const resources: IResourceItem[] = [
       icon: <AuditOutlined />
     },
   },
-  {
-    name: "step",
-    list: "/steps",
-    create: "/steps/create",
-    edit: "/steps/edit/:id",
-    show: "/steps/show/:id",
-    meta: {
-      canDelete: true,
-      hide: true
-    },
-  },
+  // {
+  //   name: "step",
+  //   list: "/steps",
+  //   create: "/steps/create",
+  //   edit: "/steps/edit/:id",
+  //   show: "/steps/show/:id",
+  //   meta: {
+  //     canDelete: true,
+  //     hide: true
+  //   },
+  // },
   {
     name: "message",
     list: "/messages",
