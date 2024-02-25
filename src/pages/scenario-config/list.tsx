@@ -71,10 +71,10 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
   // }, [])
 
   const steps = data?.data || []
-  console.log("steps", steps)
+
   let groups = steps.reduce((previousValue: any, currentStep: any) => {
     const isExistGroup = previousValue.find((s: any) => s.id === currentStep.groupCode)
-    console.log("isExistGroup", isExistGroup)
+
     return isExistGroup ? previousValue : [...previousValue, {
       id: currentStep.groupCode,
       title: currentStep.groupName,

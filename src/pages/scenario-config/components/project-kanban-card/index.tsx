@@ -3,8 +3,11 @@ import { memo, useMemo, useState } from "react";
 import { useDelete, useNavigation } from "@refinedev/core";
 
 import {
+  BellOutlined,
   DeleteOutlined,
   EyeOutlined,
+  MailOutlined,
+  MessageOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
@@ -60,6 +63,7 @@ export const ProjectCard = ({
   const [isMailModalOpen, setIsMailModalOpen] = useState(false);
   const [isResponseTimeModalOpen, setIsResponseTimeModalOpen] = useState(false);
   const [isRetryModalOpen, setIsRetryModalOpen] = useState(false);
+  const [stepData, setStepData] = useState(data)
 
   const showMessageModal = () => {
     setIsMessageModalOpen(true);
@@ -154,6 +158,8 @@ export const ProjectCard = ({
     return defaulOptions;
   }, [checkList]);
 
+  console.log("stepData", stepData)
+
   return (
     <ConfigProvider
       theme={{
@@ -170,7 +176,24 @@ export const ProjectCard = ({
       <Card
         className={styles.container}
         size="default"
-        title={<Text ellipsis={{ tooltip: channel }}>{channel}</Text>}
+        title={
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8
+          }}>
+            {data?.channel === 'PUSH' &&
+              <BellOutlined style={{ fontSize: 24 }} />
+            }
+            {data?.channel === 'EMAIL' &&
+              <MailOutlined style={{ fontSize: 24 }} />
+            }
+            {data?.channel === 'SMS' &&
+              <MessageOutlined style={{ fontSize: 24 }} />
+            }
+            <Text ellipsis={{ tooltip: channel }}>{channel}</Text>
+          </div>
+        }
         extra={
           <Dropdown
             trigger={["click"]}
@@ -207,7 +230,6 @@ export const ProjectCard = ({
         }
       >
         <Space direction="vertical">
-          <CollorBellIcon style={{ alignSelf: "center" }} width={40} height={40} />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Text size="xl" className={styles.text} >Gửi đến:</Text>
             <EditIcon onClick={showMailModal} width={25} height={25} />
@@ -248,16 +270,16 @@ export const ProjectCard = ({
         </Space>
       </Card>
       <Modal open={isMessageModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditMessageCard />
+        <EditMessageCard stepData={stepData} setStepData={setStepData} />
       </Modal>
       <Modal open={isMailModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditEmailCard />
+        <EditEmailCard stepData={stepData} setStepData={setStepData} />
       </Modal>
       <Modal open={isResponseTimeModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditResponseTime />
+        <EditResponseTime stepData={stepData} setStepData={setStepData} />
       </Modal>
       <Modal open={isRetryModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditRetryTime />
+        <EditRetryTime stepData={stepData} setStepData={setStepData} />
       </Modal>
 
     </ConfigProvider>

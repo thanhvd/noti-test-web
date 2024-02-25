@@ -7,7 +7,7 @@ import { FC } from "react";
 
 const { Title } = Typography;
 
-export const EditResponseTime: FC = () => {
+export const EditResponseTime: FC<any> = ({ stepData, setStepData }) => {
   return (
     <Space style={{ position: "relative", width: "100%" }} direction="vertical">
       <Title level={5}>{"Resonse time"}</Title>

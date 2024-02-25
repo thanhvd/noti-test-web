@@ -17,7 +17,7 @@ import { CloseOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-export const EditMessageCard: FC = () => {
+export const EditMessageCard: FC<any> = ({ stepData, setStepData }) => {
     return (
         <Space direction="vertical" style={{ display: "flex", justifyContent: "center" }}>
             <Title level={5}>{"Title message"}</Title>

@@ -7,7 +7,7 @@ import { FC } from "react";
 
 const { Title } = Typography;
 
-export const EditEmailCard: FC = () => {
+export const EditEmailCard: FC<any> = ({ stepData, setStepData }) => {
   return (
     <Space style={{ position: "relative", width: "100%" }} direction="vertical">
       <Title level={5}>{"Channel"}</Title>

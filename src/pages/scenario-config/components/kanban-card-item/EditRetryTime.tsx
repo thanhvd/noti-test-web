@@ -12,7 +12,7 @@ import {
 import { FC } from "react";
 const { Title } = Typography;
 
-export const EditRetryTime: FC = () => {
+export const EditRetryTime: FC<any> = ({ stepData, setStepData }) => {
   return (
     <Space style={{ position: "relative", width: "100%" }} direction="vertical">
       <Title level={5}>{"Số lần retry"}</Title>
