@@ -1,7 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 
 import { useModalForm } from "@refinedev/antd";
-import { useCustom, useNavigation, useParsed } from "@refinedev/core";
+import { useCustom, useInvalidate, useNavigation, useParsed } from "@refinedev/core";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { Form, Input, Modal, Select } from "antd";
 import { NOTIAPI_URL } from "@/utilities";
@@ -11,15 +12,20 @@ export const KanbanCreatePage = () => {
   const [searchParams] = useSearchParams();
   const { list } = useNavigation();
   const { id } = useParsed();
+  const invalidate = useInvalidate()
+  const queryClient = useQueryClient();
+
   const { formProps, modalProps, close } = useModalForm<any>({
     resource: "scenario/step",
     action: "create",
     defaultVisible: true,
     meta: {},
     // onMutationSuccess: () => {
-    //   close();
-    //   list("steps", "replace");
-    // }
+    //     invalidate({ invalidates: ["all"], resource: `scenario/${id}/step` });
+    //     queryClient.invalidateQueries(["get-list-steps"]);
+
+
+    // },
   });
   const scenarioData = useCustom({
     url: `${NOTIAPI_URL}/scenario/${id}/detail`,
@@ -51,6 +57,12 @@ export const KanbanCreatePage = () => {
           });
           close();
           list("steps", "replace");
+          // invalidate({ invalidates: ["all"], resource: `steps` });
+          // queryClient.invalidateQueries(["get-list-steps"]);
+          invalidate({
+            dataProviderName: "default",
+            invalidates: ["all"],
+          });
         }}
       >
         <Form.Item

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, PropsWithChildren, useMemo } from "react";
+import { FC, PropsWithChildren, useEffect, useMemo } from "react";
 import _ from "lodash"
 import {
   HttpError,
@@ -53,12 +53,23 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     method: 'get'
   })
   const scenario = scenarioData.data?.data?.data
-  const data = useCustom({
-    url: `${NOTIAPI_URL}/scenario/${id}/step/list`,
-    method: 'get'
+  const {data, refetch} = useList({
+    resource: `scenario/${id}/step`,
+    // url: `${NOTIAPI_URL}/scenario/${id}/step/list`,
+    // method: 'get',
+    
+    queryOptions: {
+      queryKey: ['get-list-steps']
+    }
   })
 
-  const steps = data?.data?.data?.data || []
+  useEffect(() => {
+    setInterval(() => {
+      refetch()
+    }, 5000)
+  }, [])
+
+  const steps = data?.data || []
   console.log("steps", steps)
   let groups = steps.reduce((previousValue: any, currentStep: any) => {
     const isExistGroup = previousValue.find((s: any) => s.id === currentStep.groupCode)
@@ -66,7 +77,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     return isExistGroup ? previousValue : [...previousValue, {
       id: currentStep.groupCode,
       title: currentStep.groupName,
-      steps: []
+      steps: steps.filter((s: any) => s.groupCode === currentStep.groupCode)
     }]
   }, []) || []
   groups = _.sortBy(groups, [function (o) { return o.id; }]);
@@ -79,7 +90,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     {
       id: newGroupCode,
       title: newGroupName,
-      steps: [{}]
+      steps: []
     }
   ]
 
