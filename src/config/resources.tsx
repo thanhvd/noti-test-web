@@ -22,11 +22,9 @@ export const resources: IResourceItem[] = [
     name: "scenario",
     list: "/scenarios",
     create: "/scenarios/create",
-    edit: "/scenarios/edit/:id",
     show: "/scenarios/show/:id",
     meta: {
       label: "Scenarios",
-      canDelete: true,
       icon: <ClusterOutlined />,
     },
   },

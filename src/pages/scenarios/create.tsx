@@ -1,8 +1,7 @@
-import { DATETIME_FORMAT } from "@/utilities";
+import React from "react";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { IResourceComponentsProps } from "@refinedev/core";
-import { DatePicker, Form, Input, Radio, Select } from "antd";
-import React from "react";
+import { Form, Input, Radio, Select } from "antd";
 
 export const ScenarioCreate: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, form } = useForm({});
@@ -56,7 +55,7 @@ export const ScenarioCreate: React.FC<IResourceComponentsProps> = () => {
             <Select {...userSelectProps} />
           </Form.Item>
         }
-        <Form.Item
+        {/* <Form.Item
           label={"Start Time"}
           name={["startTime"]}
           rules={[
@@ -66,7 +65,7 @@ export const ScenarioCreate: React.FC<IResourceComponentsProps> = () => {
           ]}
         >
           <DatePicker showTime format={DATETIME_FORMAT} />
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </Create>
   );

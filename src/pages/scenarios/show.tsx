@@ -17,18 +17,18 @@ export const ScenarioShow: React.FC<IResourceComponentsProps> = () => {
   const record = data?.data;
 
   const { data: groupData, isLoading: groupIsLoading } = useOne({
-    resource: "groupUsers",
+    resource: "group",
     id: record?.groupId || "",
     queryOptions: {
-      enabled: !!record,
+      enabled: !!record?.groupId,
     },
   });
 
   const { data: userData, isLoading: userIsLoading } = useOne({
-    resource: "users",
+    resource: "user",
     id: record?.userId || "",
     queryOptions: {
-      enabled: !!record,
+      enabled: !!record?.userId,
     },
   });
 
@@ -38,20 +38,28 @@ export const ScenarioShow: React.FC<IResourceComponentsProps> = () => {
       <NumberField value={record?.id ?? ""} />
       <Title level={5}>{"Name"}</Title>
       <TextField value={record?.name} />
-      <Title level={5}>{"Group"}</Title>
-      <TextField
-        value={
-          groupIsLoading ? <>Loading...</> : <>{groupData?.data?.name}</>
-        }
-      />
-      <Title level={5}>{"User"}</Title>
-      <TextField
-        value={
-          userIsLoading ? <>Loading...</> : <>{userData?.data?.email}</>
-        }
-      />
-      <Title level={5}>{"Start Time"}</Title>
-      <DateField value={record?.startTime} />
+      {!!record?.groupId &&
+        <>
+          <Title level={5}>{"Group"}</Title>
+          <TextField
+            value={
+              groupIsLoading ? <>Loading...</> : <>{groupData?.data?.groupName}</>
+            }
+          />
+        </>
+      }
+      {!!record?.userId &&
+        <>
+          <Title level={5}>{"User"}</Title>
+          <TextField
+            value={
+              userIsLoading ? <>Loading...</> : <>{userData?.data?.email}</>
+            }
+          />
+        </>
+      }
+      {/* <Title level={5}>{"Start Time"}</Title>
+      <DateField value={record?.startTime} /> */}
       <Title level={5}>{"Status"}</Title>
       <TextField value={record?.status} />
       <Title level={5}>{"CreatedAt"}</Title>

@@ -119,11 +119,10 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
               <Link to={`/scenarios/config/${record.id}`}>
                 <Button size="small" icon={<ScheduleOutlined />} />
               </Link>
-              <EditButton hideText size="small" recordItemId={record.id} />
+              {/* <EditButton hideText size="small" recordItemId={record.id} /> */}
               <ShowButton hideText size="small" recordItemId={record.id} />
               <Button size="small"><PlayIcon style={{ marginTop: "4px" }} width={10} height={15} onClick={showStartModal} /></Button>
-              <DeleteButton hideText size="small" recordItemId={record.id} />
-
+              {/* <DeleteButton hideText size="small" recordItemId={record.id} /> */}
             </Space>
           )}
         />
