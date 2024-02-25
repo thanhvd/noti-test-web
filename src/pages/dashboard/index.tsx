@@ -8,6 +8,8 @@ import {
     DashboardDealsChart,
     DashboardTasksChart,
 } from "./components";
+import { useCustom } from "@refinedev/core";
+// import { NOTIAPI_URL } from "@/utilities";
 
 export const DashboardPage: React.FC = () => {
     // const { data, isLoading } = useCustom<DashboardTotalCountsQuery>({
@@ -15,6 +17,7 @@ export const DashboardPage: React.FC = () => {
     //     method: "get",
     //     meta: {},
     // });
+
 
     return (
         <div className="page-container">

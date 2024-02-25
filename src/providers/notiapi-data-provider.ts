@@ -75,7 +75,7 @@ export const dataProvider = (
     const requestMethod = (method as MethodTypes) ?? "get";
 
     const { data } = await httpClient[requestMethod](
-      `${apiUrl}/${resource}?${queryString.stringify({ id: ids })}`,
+      `${apiUrl}/${resource}/list?${queryString.stringify({ id: ids })}`,
       { headers },
     );
 
@@ -85,7 +85,22 @@ export const dataProvider = (
   },
 
   create: async ({ resource, variables, meta }) => {
-    const url = `${apiUrl}/${resource}`;
+    const url = `${apiUrl}/${resource}/create`;
+
+    const { headers, method } = meta ?? {};
+    const requestMethod = (method as MethodTypesWithBody) ?? "post";
+
+    const { data } = await httpClient[requestMethod](url, variables, {
+      headers,
+    });
+
+    return {
+      data: data.data
+    };
+  },
+
+  update: async ({ resource, id, variables, meta }) => {
+    const url = `${apiUrl}/${resource}/${id}/update`;
 
     const { headers, method } = meta ?? {};
     const requestMethod = (method as MethodTypesWithBody) ?? "post";
@@ -99,23 +114,8 @@ export const dataProvider = (
     };
   },
 
-  update: async ({ resource, id, variables, meta }) => {
-    const url = `${apiUrl}/${resource}/${id}`;
-
-    const { headers, method } = meta ?? {};
-    const requestMethod = (method as MethodTypesWithBody) ?? "patch";
-
-    const { data } = await httpClient[requestMethod](url, variables, {
-      headers,
-    });
-
-    return {
-      data,
-    };
-  },
-
   getOne: async ({ resource, id, meta }) => {
-    const url = `${apiUrl}/${resource}/${id}`;
+    const url = `${apiUrl}/${resource}/${id}/detail`;
 
     const { headers, method } = meta ?? {};
     const requestMethod = (method as MethodTypes) ?? "get";
@@ -123,15 +123,15 @@ export const dataProvider = (
     const { data } = await httpClient[requestMethod](url, { headers });
 
     return {
-      data,
+      data: data.data
     };
   },
 
   deleteOne: async ({ resource, id, variables, meta }) => {
-    const url = `${apiUrl}/${resource}/${id}`;
+    const url = `${apiUrl}/${resource}/${id}/delete`;
 
     const { headers, method } = meta ?? {};
-    const requestMethod = (method as MethodTypesWithBody) ?? "delete";
+    const requestMethod = (method as MethodTypesWithBody) ?? "post";
 
     const { data } = await httpClient[requestMethod](url, {
       data: variables,
@@ -139,7 +139,7 @@ export const dataProvider = (
     });
 
     return {
-      data,
+      data
     };
   },
 

@@ -49,7 +49,7 @@ export const resources: IResourceItem[] = [
     },
   },
   {
-    name: "users",
+    name: "user",
     list: "/users",
     create: "/users/create",
     edit: "/users/edit/:id",
