@@ -53,21 +53,22 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     method: 'get'
   })
   const scenario = scenarioData.data?.data?.data
-  const {data, refetch} = useList({
+  const { data } = useList({
     resource: `scenario/${id}/step`,
     // url: `${NOTIAPI_URL}/scenario/${id}/step/list`,
     // method: 'get',
-    
+
     queryOptions: {
-      queryKey: ['get-list-steps']
+      queryKey: ['get-list-steps'],
+      refetchInterval: 5000,
     }
   })
 
-  useEffect(() => {
-    setInterval(() => {
-      refetch()
-    }, 5000)
-  }, [])
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     refetch()
+  //   }, 5000)
+  // }, [])
 
   const steps = data?.data || []
   console.log("steps", steps)
