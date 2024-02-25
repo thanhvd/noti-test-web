@@ -58,17 +58,40 @@ export const DashboardTasksChart: React.FC = () => {
         return resultArray;
     }
 
-    // Chuyển đổi mảng
     let convertedArray: ConvertedObject[] = convertArray(outputData);
-    const firstArr = convertedArray.slice(0, 2);
-    const secondArr = convertedArray.slice(2, 4);
+    const smsArr = convertedArray.slice(0, 2);
+    const emailArr = convertedArray.slice(2, 4);
+    const pushArr = convertedArray.slice(4, 6);
 
-    const emailData = useMemo(() => {
-        if (!firstArr?.length) {
+    smsArr.forEach(item => {
+        item.value = Math.round(item.value * 100);
+    });
+    emailArr.forEach(item => {
+        item.value = Math.round(item.value * 100);
+    });
+    pushArr.forEach(item => {
+        item.value = Math.round(item.value * 100);
+    });
+
+    console.log("PUSH ARR: ", pushArr)
+    const smsData = useMemo(() => {
+        if (!smsArr?.length) {
             return [];
         }
 
-        return firstArr
+        return smsArr
+            .map((stage) => ({
+                title: stage.type,
+                percent: stage.value ?? 0,
+            }))
+    }, [outputData]);
+
+    const emailData = useMemo(() => {
+        if (!emailArr?.length) {
+            return [];
+        }
+
+        return emailArr
             .map((stage) => ({
                 title: stage.type,
                 percent: stage.value ?? 0,
@@ -76,11 +99,11 @@ export const DashboardTasksChart: React.FC = () => {
     }, [outputData]);
 
     const pushData = useMemo(() => {
-        if (!secondArr?.length) {
+        if (!pushArr?.length) {
             return [];
         }
 
-        return secondArr
+        return pushArr
             .map((stage) => ({
                 title: stage.type,
                 percent: stage.value ?? 0,
@@ -100,6 +123,24 @@ export const DashboardTasksChart: React.FC = () => {
         "#000000",
     ];
 
+    const smsConfig: PieConfig = {
+        width: 200,
+        height: 200,
+        data: smsData,
+        angleField: "percent",
+        colorField: "title",
+        color: COLORS,
+        legend: false,
+        radius: 1,
+        innerRadius: 0.6,
+        label: false,
+        syncViewPadding: true,
+        statistic: {
+            title: false,
+            content: false,
+        },
+    };
+
     const emailConfig: PieConfig = {
         width: 200,
         height: 200,
@@ -117,6 +158,7 @@ export const DashboardTasksChart: React.FC = () => {
             content: false,
         },
     };
+
     const pushConfig: PieConfig = {
         width: 200,
         height: 200,
@@ -134,7 +176,6 @@ export const DashboardTasksChart: React.FC = () => {
             content: false,
         },
     };
-
 
     return (
         <Card
@@ -176,11 +217,20 @@ export const DashboardTasksChart: React.FC = () => {
                 }}
             >
                 <Suspense>
-                    <Pie {...emailConfig} />
-                    <Pie {...pushConfig} />
+                    <div>
+                        <Pie  {...smsConfig} />
+                        <Text style={{ display: "flex", justifyContent: "center", fontWeight: "500" }}>SMS</Text>
+                    </div>
+                    <div>
+                        <Pie {...emailConfig} />
+                        <Text style={{ display: "flex", justifyContent: "center", fontWeight: "500" }}>EMAIL</Text>
+                    </div>
+                    <div>
+                        <Pie {...pushConfig} />
+                        <Text style={{ display: "flex", justifyContent: "center", fontWeight: "500" }}>PUSH</Text>
+                    </div>
                 </Suspense>
-            </div>
-
+            </div >
 
             <div
                 style={{
@@ -190,7 +240,7 @@ export const DashboardTasksChart: React.FC = () => {
                     marginTop: "48px",
                 }}
             >
-                {firstArr?.map((item, index) => (
+                {smsArr?.map((item, index) => (
                     <div
                         key={index}
                         style={{
@@ -220,6 +270,6 @@ export const DashboardTasksChart: React.FC = () => {
                     </div>
                 ))}
             </div>
-        </Card>
+        </Card >
     );
 };
