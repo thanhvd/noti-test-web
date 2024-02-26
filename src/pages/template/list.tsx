@@ -21,7 +21,7 @@ export const TemplateList: React.FC<IResourceComponentsProps> = () => {
     <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column
+        {/* <Table.Column
           dataIndex={["createdAt"]}
           title={"Created At"}
           render={(value: any) => <DateField value={value} />}
@@ -35,7 +35,7 @@ export const TemplateList: React.FC<IResourceComponentsProps> = () => {
           dataIndex={["updatedAt"]}
           title={"Updated At"}
           render={(value: any) => <DateField value={value} />}
-        />
+        /> */}
         <Table.Column dataIndex="channel" title={"Channel"} />
         <Table.Column dataIndex="title" title={"Title"} />
         <Table.Column dataIndex="content" title={"Content"} />

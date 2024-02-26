@@ -32,7 +32,7 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
     <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column
+        {/* <Table.Column
           dataIndex={["createdAt"]}
           title={"Created At"}
           render={(value: any) => <DateField value={value} />}
@@ -46,11 +46,11 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
           dataIndex={["updatedAt"]}
           title={"Updated At"}
           render={(value: any) => <DateField value={value} />}
-        />
+        /> */}
         <Table.Column dataIndex="hostName" title={"Hostname"} />
         <Table.Column dataIndex="port" title={"Port"} />
         <Table.Column dataIndex="userName" title={"Username"} />
-        <Table.Column dataIndex="password" title={"Password"} />
+        {/* <Table.Column dataIndex="password" title={"Password"} /> */}
         <Table.Column dataIndex="priority" title={"Priority"} />
         <Table.Column dataIndex="status" title={"Status"} />
 

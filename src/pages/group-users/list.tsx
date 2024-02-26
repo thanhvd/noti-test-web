@@ -20,8 +20,6 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
     resource: "groupDetails",
   });
 
-  console.log("GR DETAIL: ", groupDetails?.data)
-
   // const { data: users } = useMany({
   //   resource: "users",
   //   ids: groupDetails?.data.map((groupDetail) => groupDetail.userId),
@@ -35,7 +33,7 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
     <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column
+        {/* <Table.Column
           dataIndex={["createdAt"]}
           title={"Created At"}
           render={(value: any) => <DateField value={value} />}
@@ -49,7 +47,7 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
           dataIndex={["updatedAt"]}
           title={"Updated At"}
           render={(value: any) => <DateField value={value} />}
-        />
+        /> */}
         <Table.Column dataIndex="name" title={"Name"} />
         <Table.Column dataIndex="topic" title={"Topic"} />
         <Table.Column dataIndex="channelAvails" title={"Channel Available"} />
