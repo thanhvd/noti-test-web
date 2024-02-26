@@ -1,4 +1,5 @@
 import {
+  Form,
   Select,
   Space,
   Typography,
@@ -9,14 +10,26 @@ const { Title } = Typography;
 
 export const EditEmailCard: FC<any> = ({ stepData, setStepData }) => {
   return (
-    <Space style={{ position: "relative", width: "100%" }} direction="vertical">
-      <Title level={5}>{"Channel"}</Title>
-      <Select style={{ width: "100%" }} />
-      <Title level={5}>{"Group customer"} </Title>
-      <Select style={{ width: "100%" }} />
-      <Title level={5}>{"Hoặc KH cá nhân"} </Title>
-      <Select style={{ width: "100%" }} />
-    </Space>
+    <Form layout="vertical">
+      <Form.Item
+        label={"Channel"}
+        name={["channel"]}
+      >
+        <Select style={{ width: "100%" }} />
+      </Form.Item>
+      <Form.Item
+        label={"Group customer"}
+        name={["customerGroup"]}
+      >
+        <Select style={{ width: "100%" }} />
+      </Form.Item>
+      <Form.Item
+        label={"Hoặc KH cá nhân"}
+        name={["users"]}
+      >
+        <Select style={{ width: "100%" }} />
+      </Form.Item>
+    </Form>
 
   );
 };

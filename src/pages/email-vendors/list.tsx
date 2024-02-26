@@ -8,7 +8,7 @@ import {
   useTable,
 } from "@refinedev/antd";
 import { BaseRecord, IResourceComponentsProps } from "@refinedev/core";
-import { Space, Table } from "antd";
+import { Select, Space, Switch, Table } from "antd";
 import React from "react";
 
 export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
@@ -16,6 +16,17 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
     syncWithLocation: true,
   });
 
+  // const handleChangeStatus = async (status: string, record: any) => {
+  //   try {
+  //     await 
+  //     } catch (e) {
+  //     console.log("error: ", e)
+  //   }
+  // }
+
+  const onChange = (checked: boolean) => {
+    console.log(`switch to ${checked}`);
+  };
 
   return (
     <List>
@@ -41,15 +52,21 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
         <Table.Column dataIndex="userName" title={"Username"} />
         <Table.Column dataIndex="password" title={"Password"} />
         <Table.Column dataIndex="priority" title={"Priority"} />
+        <Table.Column dataIndex="status" title={"Status"} />
 
         <Table.Column
           title={"Actions"}
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
             <Space>
+              <Switch
+                defaultChecked={record.status}
+                onChange={onChange}
+              />
               <EditButton hideText size="small" recordItemId={record.id} />
               <ShowButton hideText size="small" recordItemId={record.id} />
               <DeleteButton hideText size="small" recordItemId={record.id} />
+
             </Space>
           )}
         />

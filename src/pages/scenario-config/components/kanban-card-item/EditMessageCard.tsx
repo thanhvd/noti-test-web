@@ -2,6 +2,7 @@ import {
     Button,
     Card,
     ConfigProvider,
+    Form,
     Input,
     Select,
     Skeleton,
@@ -13,23 +14,32 @@ import {
 import styles from "./index.module.css";
 import TextArea from "antd/lib/input/TextArea";
 import { FC } from "react";
-import { CloseOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
 export const EditMessageCard: FC<any> = ({ stepData, setStepData }) => {
+    const handleSubmit = (values: any) => {
+        console.log("values", values)
+    }
     return (
-        <Space direction="vertical" style={{ display: "flex", justifyContent: "center" }}>
-            
-            <Title level={5}>{"Title message"}</Title>
-            <Input className={styles.input} placeholder="Add text" />
-            <Title level={5}>{"Content message"} </Title>
-            <TextArea placeholder="Add text" />
+        <Form layout="vertical" onFinish={handleSubmit}>
+            <Form.Item
+                label={"Content message"}
+                name={["content"]}
+            >
+                <TextArea placeholder="Add text" />
+            </Form.Item>
+
             <div className={styles.selectField}>
                 <div style={{ fontSize: "14px", color: "blue", textDecoration: "underline", fontWeight: "500", marginTop: "5px" }}>Sử dụng template</div>
-                <Select style={{ width: "75%" }} />
+                <Form.Item
+                    style={{ width: "75%" }}
+                    name={["templates"]}
+                >
+                    <Select />
+                </Form.Item>
             </div>
-        </Space>
+        </Form>
     );
 };
 
