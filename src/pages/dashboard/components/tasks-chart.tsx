@@ -1,14 +1,24 @@
 import React, { lazy, Suspense, useMemo } from "react";
 
-import { useNavigation } from "@refinedev/core";
+import { useCustom, useNavigation } from "@refinedev/core";
 
 import { ProjectOutlined, RightCircleOutlined } from "@ant-design/icons";
 import { PieConfig } from "@ant-design/plots";
 import { Button, Card } from "antd";
 
 import { Text } from "@/components";
+import { NOTIAPI_URL } from "@/utilities";
 
 const Pie = lazy(() => import("@ant-design/plots/es/components/pie"));
+interface OriginalObject {
+    percent: { success: number, fail: number };
+    title: string;
+}
+
+interface ConvertedObject {
+    type: string;
+    value: number;
+}
 
 export const DashboardTasksChart: React.FC = () => {
     const { list } = useNavigation();
@@ -23,69 +33,82 @@ export const DashboardTasksChart: React.FC = () => {
     //     meta: { gqlQuery: DASHBOARD_TASKS_CHART_QUERY },
     // });
 
-    const data = {
-        "data": [
-            {
-                "title": "TODO",
-                "tasksAggregate": [
-                    {
-                        "count": {
-                            "id": 2
-                        }
-                    }
-                ]
-            },
-            {
-                "title": "IN PROGRESS",
-                "tasksAggregate": [
-                    {
-                        "count": {
-                            "id": 4
-                        }
-                    }
-                ]
-            },
-            {
-                "title": "IN REVIEW",
-                "tasksAggregate": [
-                    {
-                        "count": {
-                            "id": 2
-                        }
-                    }
-                ]
-            },
-            {
-                "title": "DONE",
-                "tasksAggregate": [
-                    {
-                        "count": {
-                            "id": 3
-                        }
-                    }
-                ]
-            }
-        ]
+    const { data } = useCustom({
+        url: `${NOTIAPI_URL}/dashboard/summary`,
+        method: 'get'
+    });
+
+    const record = data?.data.data
+    console.log("RECORD: ", record)
+
+    const outputData = record ? Object.keys(record).map(key => ({
+        title: key,
+        percent: record[key]
+    })) : []
+    console.log("OUPUTDATA: ", outputData)
+
+    function convertArray(array: OriginalObject[]): ConvertedObject[] {
+        let resultArray: ConvertedObject[] = [];
+        array.forEach(obj => {
+            let successValue: number = obj.percent.success;
+            let failValue: number = obj.percent.fail;
+            resultArray.push({ type: "Success", value: successValue });
+            resultArray.push({ type: "Failure", value: failValue });
+        });
+        return resultArray;
     }
 
-    const tasksData = useMemo(() => {
-        if (!data?.data?.length) {
+    let convertedArray: ConvertedObject[] = convertArray(outputData);
+    const smsArr = convertedArray.slice(0, 2);
+    const emailArr = convertedArray.slice(2, 4);
+    const pushArr = convertedArray.slice(4, 6);
+
+    smsArr.forEach(item => {
+        item.value = Math.round(item.value * 100);
+    });
+    emailArr.forEach(item => {
+        item.value = Math.round(item.value * 100);
+    });
+    pushArr.forEach(item => {
+        item.value = Math.round(item.value * 100);
+    });
+
+    console.log("PUSH ARR: ", pushArr)
+    const smsData = useMemo(() => {
+        if (!smsArr?.length) {
             return [];
         }
 
-        return data.data
+        return smsArr
             .map((stage) => ({
-                title: stage.title,
-                value: stage.tasksAggregate?.[0]?.count?.id ?? 0,
+                title: stage.type,
+                percent: stage.value ?? 0,
             }))
-            .filter(
-                (stage) =>
-                    stage.value !== null &&
-                    stage.value !== undefined &&
-                    stage.value > 0,
-            )
-            .sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
-    }, [data?.data]);
+    }, [outputData]);
+
+    const emailData = useMemo(() => {
+        if (!emailArr?.length) {
+            return [];
+        }
+
+        return emailArr
+            .map((stage) => ({
+                title: stage.type,
+                percent: stage.value ?? 0,
+            }))
+    }, [outputData]);
+
+    const pushData = useMemo(() => {
+        if (!pushArr?.length) {
+            return [];
+        }
+
+        return pushArr
+            .map((stage) => ({
+                title: stage.type,
+                percent: stage.value ?? 0,
+            }))
+    }, [outputData]);
 
     const COLORS = [
         "#BAE0FF",
@@ -100,11 +123,47 @@ export const DashboardTasksChart: React.FC = () => {
         "#000000",
     ];
 
-    const config: PieConfig = {
-        width: 168,
-        height: 168,
-        data: tasksData,
-        angleField: "value",
+    const smsConfig: PieConfig = {
+        width: 200,
+        height: 200,
+        data: smsData,
+        angleField: "percent",
+        colorField: "title",
+        color: COLORS,
+        legend: false,
+        radius: 1,
+        innerRadius: 0.6,
+        label: false,
+        syncViewPadding: true,
+        statistic: {
+            title: false,
+            content: false,
+        },
+    };
+
+    const emailConfig: PieConfig = {
+        width: 200,
+        height: 200,
+        data: emailData,
+        angleField: "percent",
+        colorField: "title",
+        color: COLORS,
+        legend: false,
+        radius: 1,
+        innerRadius: 0.6,
+        label: false,
+        syncViewPadding: true,
+        statistic: {
+            title: false,
+            content: false,
+        },
+    };
+
+    const pushConfig: PieConfig = {
+        width: 200,
+        height: 200,
+        data: pushData,
+        angleField: "percent",
         colorField: "title",
         color: COLORS,
         legend: false,
@@ -120,7 +179,7 @@ export const DashboardTasksChart: React.FC = () => {
 
     return (
         <Card
-            style={{ height: "100%" }}
+            style={{ height: "100%", width: "700px" }}
             headStyle={{ padding: "8px 16px" }}
             bodyStyle={{
                 padding: "32px",
@@ -152,14 +211,27 @@ export const DashboardTasksChart: React.FC = () => {
                 style={{
                     position: "relative",
                     display: "flex",
-                    flexDirection: "column",
+                    justifyContent: "center",
+                    flexDirection: "row",
                     alignItems: "center",
                 }}
             >
                 <Suspense>
-                    <Pie {...config} />
+                    <div>
+                        <Pie  {...smsConfig} />
+                        <Text style={{ display: "flex", justifyContent: "center", fontWeight: "500" }}>SMS</Text>
+                    </div>
+                    <div>
+                        <Pie {...emailConfig} />
+                        <Text style={{ display: "flex", justifyContent: "center", fontWeight: "500" }}>EMAIL</Text>
+                    </div>
+                    <div>
+                        <Pie {...pushConfig} />
+                        <Text style={{ display: "flex", justifyContent: "center", fontWeight: "500" }}>PUSH</Text>
+                    </div>
                 </Suspense>
-            </div>
+            </div >
+
             <div
                 style={{
                     display: "flex",
@@ -168,7 +240,7 @@ export const DashboardTasksChart: React.FC = () => {
                     marginTop: "48px",
                 }}
             >
-                {tasksData?.map((item, index) => (
+                {smsArr?.map((item, index) => (
                     <div
                         key={index}
                         style={{
@@ -193,11 +265,11 @@ export const DashboardTasksChart: React.FC = () => {
                                 whiteSpace: "nowrap",
                             }}
                         >
-                            {item.title.toLowerCase()}
+                            {item.type.toLowerCase()}
                         </Text>
                     </div>
                 ))}
             </div>
-        </Card>
+        </Card >
     );
 };
