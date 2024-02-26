@@ -14,6 +14,7 @@ import { Button, Modal, Space, Table } from "antd";
 import React, { useState } from "react";
 import { EditStart } from "../scenario-config/components/kanban-card-item/EditStart";
 import { DATETIME_FORMAT, DATE_FORMAT } from "@/utilities";
+import styles from "./index.module.css"
 
 export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
   const [isStartModalOpen, setIsStartModalOpen] = useState(false);
@@ -56,6 +57,33 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
 
   const handleCancel = () => {
     setIsStartModalOpen(false);
+  };
+
+  const getStatusClassName = (status: string) => {
+    switch (status) {
+      case "PROCESSING":
+        return styles.blue;
+      case "PENDING":
+        return styles.blue;
+      case "SENT":
+        return styles.green;
+      case "DONE":
+        return styles.green;
+      case "NOT_SENT":
+        return styles.red;
+      case "RETRY":
+        return styles.red;
+      case "NOT_RESPONSE":
+        return styles.red;
+      case "SEND_FAILED":
+        return styles.red;
+      case "READ":
+        return styles.yellow;
+      case "RECEIVED":
+        return styles.yellow;
+      default:
+        return "";
+    }
   };
 
   return (
@@ -105,7 +133,15 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
           title={"Start Time"}
           render={(value: any) => <DateField value={value} format={DATETIME_FORMAT} />}
         />
-        <Table.Column dataIndex="status" title={"Status"} />
+        <Table.Column
+          dataIndex="status"
+          title={"Status"}
+          render={(value) => (
+            <div className={getStatusClassName(value)}>
+              {value}
+            </div>
+          )}
+        />
         <Table.Column
           dataIndex={["createdAt"]}
           title={"Created at"}
