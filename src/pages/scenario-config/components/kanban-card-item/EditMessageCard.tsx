@@ -4,6 +4,7 @@ import {
     ConfigProvider,
     Form,
     Input,
+    Modal,
     Select,
     Skeleton,
     Space,
@@ -17,29 +18,51 @@ import { FC } from "react";
 
 const { Title } = Typography;
 
-export const EditMessageCard: FC<any> = ({ stepData, setStepData }) => {
-    const handleSubmit = (values: any) => {
-        console.log("values", values)
-    }
+export const EditMessageCard: FC<any> = ({ open, onOk, onCancel, stepData, setStepData }) => {
+    const [form] = Form.useForm();
     return (
-        <Form layout="vertical" onFinish={handleSubmit}>
-            <Form.Item
-                label={"Content message"}
-                name={["content"]}
-            >
-                <TextArea placeholder="Add text" />
-            </Form.Item>
+        <Modal
+            open={open}
+            onCancel={onCancel}
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then((values) => {
+                        setStepData((step: any) => ({ ...step, ...values }));
+                        onOk()
+                    })
+                    .catch((info) => {
+                        console.log('Validate Failed:', info);
+                    });
+            }}
+        >
+            <Form
+                form={form}
+                layout="vertical"
+                initialValues={{
+                    templateContent: stepData.templateContent,
+                    templateTitle: stepData.templateTitle
 
-            <div className={styles.selectField}>
-                <div style={{ fontSize: "14px", color: "blue", textDecoration: "underline", fontWeight: "500", marginTop: "5px" }}>Sử dụng template</div>
+                }}>
                 <Form.Item
-                    style={{ width: "75%" }}
-                    name={["templates"]}
+                    label={"Content message"}
+                    name={["templateContent"]}
                 >
-                    <Select />
+                    <TextArea placeholder="Add text" />
                 </Form.Item>
-            </div>
-        </Form>
+
+                <div className={styles.selectField}>
+                    <div style={{ fontSize: "14px", color: "blue", textDecoration: "underline", fontWeight: "500", marginTop: "5px" }}>Sử dụng template</div>
+                    <Form.Item
+                        style={{ width: "75%" }}
+                        name={["templateTitle"]}
+                    >
+                        <Select />
+                    </Form.Item>
+                </div>
+            </Form>
+        </Modal>
+
     );
 };
 

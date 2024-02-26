@@ -296,16 +296,9 @@ export const ProjectCard = ({
           </div>
         </Space>
       </Card>
-      <Modal open={isMessageModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditMessageCard stepData={stepData} setStepData={setStepData} />
-      </Modal>
-      <Modal open={isMailModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditEmailCard stepData={stepData} setStepData={setStepData} />
-      </Modal>
-      <Modal open={isResponseTimeModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditResponseTime stepData={stepData} setStepData={setStepData} />
-      </Modal>
-
+      <EditMessageCard open={isMessageModalOpen} onOk={handleOk} onCancel={handleCancel} stepData={stepData} setStepData={setStepData} />
+      {/* <EditEmailCard open={isMailModalOpen} onOk={handleOk} onCancel={handleCancel} stepData={stepData} setStepData={setStepData} /> */}
+      <EditResponseTime open={isResponseTimeModalOpen} onOk={handleOk} onCancel={handleCancel} stepData={stepData} setStepData={setStepData} />
       <EditRetryTime open={isRetryModalOpen} onOk={handleOk} onCancel={handleCancel} stepData={stepData} setStepData={setStepData} />
 
     </ConfigProvider>
