@@ -235,8 +235,8 @@ export const ProjectCard = ({
             <Text size="xl" className={styles.text} >Gửi đến:</Text>
             <EditIcon onClick={showMailModal} width={25} height={25} />
           </div> */}
-          <Text size="xl" className={styles.title}>Chương trình lì xì tết đầu năm</Text>
-          <Text size="xs" className={styles.content}>he he hh eheh eh eh eh e he he he heho ho oho ho ho hoho fdo dofh odfho dfho dfoh dfoh odf odf odfho dfoh dfoh dfo hdfoh odfho dfho dfoh dofh </Text>
+          <Text size="xl" className={styles.title}>{stepData.templateTitle}</Text>
+          <Text size="xs" className={styles.content}>{stepData.templateContent}</Text>
           <Text size="sm" className={styles.editMessage} onClick={showMessageModal}>Edit message</Text>
           <div className={styles.timeContainer}>
             <div className={styles.timeItem}>
