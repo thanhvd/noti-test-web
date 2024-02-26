@@ -278,9 +278,8 @@ export const ProjectCard = ({
       <Modal open={isResponseTimeModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <EditResponseTime stepData={stepData} setStepData={setStepData} />
       </Modal>
-      <Modal open={isRetryModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditRetryTime stepData={stepData} setStepData={setStepData} />
-      </Modal>
+
+      <EditRetryTime open={isRetryModalOpen} onOk={handleOk} onCancel={handleCancel} stepData={stepData} setStepData={setStepData} />
 
     </ConfigProvider>
   );
