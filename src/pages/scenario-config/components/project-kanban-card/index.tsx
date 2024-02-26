@@ -1,6 +1,6 @@
 import { memo, useMemo, useState } from "react";
 
-import { useDelete, useNavigation } from "@refinedev/core";
+import { useDelete, useNavigation, useUpdate } from "@refinedev/core";
 
 import {
   BellOutlined,
@@ -59,6 +59,7 @@ export const ProjectCard = ({
   const { token } = theme.useToken();
   const { edit } = useNavigation();
   const { mutate } = useDelete();
+  const { mutate: mutateUpdateStep } = useUpdate();
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [isMailModalOpen, setIsMailModalOpen] = useState(false);
   const [isResponseTimeModalOpen, setIsResponseTimeModalOpen] = useState(false);
@@ -182,13 +183,13 @@ export const ProjectCard = ({
             alignItems: 'center',
             gap: 8
           }}>
-            {data?.channel === 'PUSH' &&
+            {stepData?.channel === 'PUSH' &&
               <BellOutlined style={{ fontSize: 24 }} />
             }
-            {data?.channel === 'EMAIL' &&
+            {stepData?.channel === 'EMAIL' &&
               <MailOutlined style={{ fontSize: 24 }} />
             }
-            {data?.channel === 'SMS' &&
+            {stepData?.channel === 'SMS' &&
               <MessageOutlined style={{ fontSize: 24 }} />
             }
             <Text ellipsis={{ tooltip: channel }}>{channel}</Text>
@@ -230,10 +231,10 @@ export const ProjectCard = ({
         }
       >
         <Space direction="vertical">
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Text size="xl" className={styles.text} >Gửi đến:</Text>
             <EditIcon onClick={showMailModal} width={25} height={25} />
-          </div>
+          </div> */}
           <Text size="xl" className={styles.title}>Chương trình lì xì tết đầu năm</Text>
           <Text size="xs" className={styles.content}>he he hh eheh eh eh eh e he he he heho ho oho ho ho hoho fdo dofh odfho dfho dfoh dfoh odf odf odfho dfoh dfoh dfo hdfoh odfho dfho dfoh dofh </Text>
           <Text size="sm" className={styles.editMessage} onClick={showMessageModal}>Edit message</Text>
@@ -244,28 +245,54 @@ export const ProjectCard = ({
             <div className={styles.timeItem}>
               <ReverseIcon style={{ alignSelf: "center" }} width={25} height={25} onClick={showRetryModal} />
               <div className={styles.smallTimeItem}>
-                <TextField value={data?.delayRetryHour} />h
+                <TextField value={stepData?.delayRetryHour} />h
               </div>
               <div className={styles.smallTimeItem}>
-                <TextField value={data?.delayRetryMin} />m
+                <TextField value={stepData?.delayRetryMin} />m
               </div>
               <div className={styles.smallTimeItem}>
-                <TextField value={data?.delayRetrySecond} />s
+                <TextField value={stepData?.delayRetrySecond} />s
               </div>
             </div>
 
             <div className={styles.timeItem}>
               <ClockIcon style={{ alignSelf: "center" }} width={25} height={25} onClick={showResponseTimeModal} />
               <div className={styles.smallTimeItem}>
-                <TextField value={data?.responseTimeHour} />h
+                <TextField value={stepData?.responseTimeHour} />h
               </div>
               <div className={styles.smallTimeItem}>
-                <TextField value={data?.responseTimeMin} />m
+                <TextField value={stepData?.responseTimeMin} />m
               </div>
               <div className={styles.smallTimeItem}>
-                <TextField value={data?.responseTimeSecond} />s
+                <TextField value={stepData?.responseTimeSecond} />s
               </div>
             </div>
+          </div>
+          <div style={{
+            display: "flex",
+            justifyContent: "flex-end"
+          }}>
+            <Button
+              type="primary"
+              title="Save"
+              // onPointerDown={(e) => {
+              //   e.stopPropagation();
+              // }}
+              onClick={(e) => {
+                e.stopPropagation();
+                const { id, ...formValues } = stepData
+                mutateUpdateStep({
+                  resource: `scenario/step`,
+                  values: formValues,
+                  id,
+                  meta: {
+                    method: 'put'
+                  }
+                })
+              }}
+            >
+              Save
+            </Button>
           </div>
         </Space>
       </Card>
