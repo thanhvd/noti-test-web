@@ -26,6 +26,8 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
   });
 
   const [scenarioData, setScenarioData] = useState(tableProps.dataSource)
+  const [selectedScenario, setSelectedScenario] = useState()
+
   const Link = useLink();
 
   const { data: groupData, isLoading: groupIsLoading } = useMany({
@@ -50,16 +52,19 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
     },
   });
 
-  const showStartModal = () => {
+  const showStartModal = (scenario: any) => {
+    setSelectedScenario(scenario)
     setIsStartModalOpen(true);
   };
 
   const handleOk = () => {
     setIsStartModalOpen(false);
+    setSelectedScenario(undefined)
   };
 
   const handleCancel = () => {
     setIsStartModalOpen(false);
+    setSelectedScenario(undefined)
   };
 
   const getStatusClassName = (status: string) => {
@@ -160,13 +165,15 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
               </Link>
               {/* <EditButton hideText size="small" recordItemId={record.id} /> */}
               <ShowButton hideText size="small" recordItemId={record.id} />
-              <Button size="small"><PlayIcon style={{ marginTop: "4px" }} width={10} height={15} onClick={showStartModal} /></Button>
+              <Button size="small"><PlayIcon style={{ marginTop: "4px" }} width={10} height={15} onClick={() => {
+                showStartModal(record)
+              }} /></Button>
               {/* <DeleteButton hideText size="small" recordItemId={record.id} /> */}
             </Space>
           )}
         />
       </Table>
-      <EditStart open={isStartModalOpen} onOk={handleOk} onCancel={handleCancel} scenarioData={scenarioData} setScenarioData={setScenarioData} />
+      <EditStart open={isStartModalOpen} onOk={handleOk} onCancel={handleCancel} scenarioData={scenarioData} setScenarioData={setScenarioData} selectedScenario={selectedScenario} />
     </List>
 
   );
