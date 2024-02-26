@@ -55,7 +55,7 @@ export const UserList: React.FC<IResourceComponentsProps> = () => {
             getValueFromEvent={getValueFromEvent}
             noStyle
           >
-            <Upload.Dragger name="file" action={`${NOTIAPI_URL}/media/upload`} listType="picture" maxCount={5} multiple>
+            <Upload.Dragger name="file" action={`${NOTIAPI_URL}/group/import/excel`} listType="picture" maxCount={5} multiple>
               <p className="ant-upload-text">Drag & drop a file in this area</p>
             </Upload.Dragger>
           </Form.Item>
