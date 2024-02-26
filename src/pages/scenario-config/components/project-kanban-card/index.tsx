@@ -66,6 +66,8 @@ export const ProjectCard = ({
   const [isRetryModalOpen, setIsRetryModalOpen] = useState(false);
   const [stepData, setStepData] = useState(data)
 
+  console.log("DATA: ", data)
+
   const showMessageModal = () => {
     setIsMessageModalOpen(true);
   };

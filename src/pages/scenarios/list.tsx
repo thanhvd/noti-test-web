@@ -20,9 +20,9 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
-  const Link = useLink();
 
-  console.log("tableProps?.dataSource", !!tableProps?.dataSource)
+  const [scenarioData, setScenarioData] = useState(tableProps.dataSource)
+  const Link = useLink();
 
   const { data: groupData, isLoading: groupIsLoading } = useMany({
     resource: "group",
@@ -127,9 +127,7 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
           )}
         />
       </Table>
-      <Modal open={isStartModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <EditStart />
-      </Modal>
+      <EditStart open={isStartModalOpen} onOk={handleOk} onCancel={handleCancel} scenarioData={scenarioData} setScenarioData={setScenarioData} />
     </List>
 
   );
