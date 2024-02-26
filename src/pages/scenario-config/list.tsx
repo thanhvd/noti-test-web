@@ -72,7 +72,7 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     return isExistGroup ? previousValue : [...previousValue, {
       id: currentStep.groupCode,
       title: currentStep.groupName,
-      steps: _.orderBy(steps.filter((s: any) => s.groupCode === currentStep.groupCode), 'createdAt', 'desc')
+      steps: _.orderBy(steps.filter((s: any) => s.groupCode === currentStep.groupCode), 'createdAt', 'asc')
     }]
   }, []) || []
   groups = _.orderBy(groups, 'createdAt', 'asc');

@@ -20,6 +20,9 @@ export const ScenarioList: React.FC<IResourceComponentsProps> = () => {
   const [isStartModalOpen, setIsStartModalOpen] = useState(false);
   const { tableProps } = useTable({
     syncWithLocation: true,
+    queryOptions: {
+      refetchInterval: 5000,
+    }
   });
 
   const [scenarioData, setScenarioData] = useState(tableProps.dataSource)
