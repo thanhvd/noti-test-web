@@ -198,38 +198,59 @@ export const ProjectCard = ({
           </div>
         }
         extra={
-          <Dropdown
-            trigger={["click"]}
-            menu={{
-              items: dropdownItems,
-              onPointerDown: (e) => {
-                e.stopPropagation();
-              },
-              onClick: (e) => {
-                e.domEvent.stopPropagation();
-              },
+          <Button
+            type="primary"
+            title="Save"
+            // onPointerDown={(e) => {
+            //   e.stopPropagation();
+            // }}
+            onClick={(e) => {
+              e.stopPropagation();
+              const { id, ...formValues } = stepData
+              mutateUpdateStep({
+                resource: `scenario/step`,
+                values: formValues,
+                id,
+                meta: {
+                  method: 'put'
+                }
+              })
             }}
-            placement="bottom"
-            arrow={{ pointAtCenter: true }}
           >
-            <Button
-              type="text"
-              shape="circle"
-              icon={
-                <MoreOutlined
-                  style={{
-                    transform: "rotate(90deg)",
-                  }}
-                />
-              }
-              onPointerDown={(e) => {
-                e.stopPropagation();
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            />
-          </Dropdown>
+            Save
+          </Button>
+          // <Dropdown
+          //   trigger={["click"]}
+          //   menu={{
+          //     items: dropdownItems,
+          //     onPointerDown: (e) => {
+          //       e.stopPropagation();
+          //     },
+          //     onClick: (e) => {
+          //       e.domEvent.stopPropagation();
+          //     },
+          //   }}
+          //   placement="bottom"
+          //   arrow={{ pointAtCenter: true }}
+          // >
+          //   <Button
+          //     type="text"
+          //     shape="circle"
+          //     icon={
+          //       <MoreOutlined
+          //         style={{
+          //           transform: "rotate(90deg)",
+          //         }}
+          //       />
+          //     }
+          //     onPointerDown={(e) => {
+          //       e.stopPropagation();
+          //     }}
+          //     onClick={(e) => {
+          //       e.stopPropagation();
+          //     }}
+          //   />
+          // </Dropdown>
         }
       >
         <Space direction="vertical">
@@ -270,7 +291,7 @@ export const ProjectCard = ({
               </div>
             </div>
           </div>
-          <div style={{
+          {/* <div style={{
             display: "flex",
             justifyContent: "flex-end"
           }}>
@@ -295,7 +316,7 @@ export const ProjectCard = ({
             >
               Save
             </Button>
-          </div>
+          </div> */}
         </Space>
       </Card>
       <EditMessageCard open={isMessageModalOpen} onOk={handleOk} onCancel={handleCancel} stepData={stepData} setStepData={setStepData} />

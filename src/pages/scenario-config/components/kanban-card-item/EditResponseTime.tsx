@@ -8,7 +8,7 @@ import {
 } from "antd";
 import { FC } from "react";
 
-const { Title } = Typography;
+const { Paragraph } = Typography;
 
 export const EditResponseTime: FC<any> = ({ open, onOk, onCancel, stepData, setStepData }) => {
   const [form] = Form.useForm();
@@ -35,6 +35,7 @@ export const EditResponseTime: FC<any> = ({ open, onOk, onCancel, stepData, setS
         responseTimeSecond: stepData.responseTimeSecond,
       }} >
         {/* <Title level={5}>{"Repsonse time"}</Title> */}
+        <Paragraph>{"Repsonse time"}</Paragraph>
         <Space direction="horizontal">
           <Form.Item
             label={"Hour"}

@@ -15,11 +15,20 @@ import {
 import styles from "./index.module.css";
 import TextArea from "antd/lib/input/TextArea";
 import { FC } from "react";
+import { useSelect } from "@refinedev/antd";
 
 const { Title } = Typography;
 
 export const EditMessageCard: FC<any> = ({ open, onOk, onCancel, stepData, setStepData }) => {
     const [form] = Form.useForm();
+
+    const { selectProps: templateSelectProps, queryResult } = useSelect({
+        resource: "template",
+        optionLabel: "title",
+    });
+
+    console.log("queryResult", queryResult)
+
     return (
         <Modal
             open={open}
@@ -28,7 +37,16 @@ export const EditMessageCard: FC<any> = ({ open, onOk, onCancel, stepData, setSt
                 form
                     .validateFields()
                     .then((values) => {
-                        setStepData((step: any) => ({ ...step, ...values }));
+                        const selectedTemplate: any = queryResult.data?.data.find((o: any) => o.id === values.templateId)
+                        console.log("selectedTemplate", selectedTemplate)
+                        setStepData((step: any) => ({
+                            ...step,
+                            ...values,
+                            ...{
+                                templateTitle: selectedTemplate?.title,
+                                templateContent: selectedTemplate?.content,
+                            }
+                        }));
                         onOk()
                     })
                     .catch((info) => {
@@ -44,14 +62,28 @@ export const EditMessageCard: FC<any> = ({ open, onOk, onCancel, stepData, setSt
                     templateTitle: stepData.templateTitle
 
                 }}>
+
+                <Form.Item
+                    label={"Template"}
+                    name={["templateId"]}
+                >
+                    <Select {...templateSelectProps} />
+                </Form.Item>
+
+                {/* <Form.Item
+                    label={"Content title"}
+                    name={["templateTitle"]}
+                >
+                    <Input />
+                </Form.Item>
                 <Form.Item
                     label={"Content message"}
                     name={["templateContent"]}
                 >
                     <TextArea placeholder="Add text" />
-                </Form.Item>
+                </Form.Item> */}
 
-                <div className={styles.selectField}>
+                {/* <div className={styles.selectField}>
                     <div style={{ fontSize: "14px", color: "blue", textDecoration: "underline", fontWeight: "500", marginTop: "5px" }}>Sử dụng template</div>
                     <Form.Item
                         style={{ width: "75%" }}
@@ -59,7 +91,7 @@ export const EditMessageCard: FC<any> = ({ open, onOk, onCancel, stepData, setSt
                     >
                         <Select />
                     </Form.Item>
-                </div>
+                </div> */}
             </Form>
         </Modal>
 

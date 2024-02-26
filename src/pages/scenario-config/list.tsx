@@ -64,12 +64,6 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     }
   })
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     refetch()
-  //   }, 5000)
-  // }, [])
-
   const steps = data?.data || []
 
   let groups = steps.reduce((previousValue: any, currentStep: any) => {
@@ -78,10 +72,10 @@ export const KanbanPage: FC<PropsWithChildren> = ({ children }) => {
     return isExistGroup ? previousValue : [...previousValue, {
       id: currentStep.groupCode,
       title: currentStep.groupName,
-      steps: steps.filter((s: any) => s.groupCode === currentStep.groupCode)
+      steps: _.orderBy(steps.filter((s: any) => s.groupCode === currentStep.groupCode), 'createdAt', 'desc')
     }]
   }, []) || []
-  groups = _.sortBy(groups, [function (o) { return o.id; }]);
+  groups = _.orderBy(groups, 'createdAt', 'asc');
 
   // const initTasks = steps?.data.filter((task: any) => !task.prevStepId) || []
   const newGroupCode = `${scenario?.name}-${groups.length + 1}`
