@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { NOTIAPI_URL } from "@/utilities";
 import {
   DateField,
   DeleteButton,
@@ -9,28 +10,46 @@ import {
 } from "@refinedev/antd";
 import { BaseRecord, IResourceComponentsProps } from "@refinedev/core";
 import { Select, Space, Switch, Table } from "antd";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
 
-  // const handleChangeStatus = async (status: string, record: any) => {
-  //   try {
-  //     await 
-  //     } catch (e) {
-  //     console.log("error: ", e)
-  //   }
-  // }
+  console.log("TB PROPS: ", tableProps.dataSource)
+  const [switchStates, setSwitchStates] = useState<{ [key: string]: boolean }>({});
+  const [dataSource, setDataSource] = useState<BaseRecord[]>([]);
+  const handleChangeStatus = (checked: boolean, id: any) => {
+    axios({
+      method: "put",
+      url: `${NOTIAPI_URL}/email/vendor/${id}/update`,
+      data: {
+        status: checked === true ? "ACTIVE" : "INACTIVE"
+      }
+    }).then(() => {
+      // Cập nhật trạng thái của switch sau khi API đã được gọi thành công
+      setSwitchStates(prevStates => ({
+        ...prevStates,
+        [id]: checked
+      }));
 
-  const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
+    });
   };
+
+  useEffect(() => {
+    // Cập nhật dataSource mới dựa trên switchStates
+    const updatedDataSource = tableProps?.dataSource?.map((record: BaseRecord) => ({
+      ...record,
+      status: switchStates[record.id] ? "ACTIVE" : "INACTIVE"
+    }));
+    setDataSource(updatedDataSource);
+  }, [tableProps.dataSource, switchStates]);
 
   return (
     <List>
-      <Table {...tableProps} rowKey="id">
+      <Table {...tableProps} dataSource={dataSource} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
         {/* <Table.Column
           dataIndex={["createdAt"]}
@@ -60,8 +79,8 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
           render={(_, record: BaseRecord) => (
             <Space>
               <Switch
-                defaultChecked={record.status}
-                onChange={onChange}
+                checked={switchStates[record.id]}
+                onChange={(checked) => handleChangeStatus(checked, record.id)}
               />
               <EditButton hideText size="small" recordItemId={record.id} />
               <ShowButton hideText size="small" recordItemId={record.id} />
