@@ -19,7 +19,10 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
   });
 
   console.log("TB PROPS: ", tableProps.dataSource)
-  const [switchStates, setSwitchStates] = useState<{ [key: string]: boolean }>({});
+  const [switchStates, setSwitchStates] = useState<{ [key: string]: boolean }>(() => {
+    const savedState = localStorage.getItem("switchStates");
+    return savedState ? JSON.parse(savedState) : {};
+  });
   const [dataSource, setDataSource] = useState<BaseRecord[]>([]);
   const handleChangeStatus = (checked: boolean, id: any) => {
     axios({
@@ -29,7 +32,6 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
         status: checked === true ? "ACTIVE" : "INACTIVE"
       }
     }).then(() => {
-      // Cập nhật trạng thái của switch sau khi API đã được gọi thành công
       setSwitchStates(prevStates => ({
         ...prevStates,
         [id]: checked
@@ -38,8 +40,9 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
     });
   };
 
+  console.log("SWITCH STATE: ", switchStates)
+
   useEffect(() => {
-    // Cập nhật dataSource mới dựa trên switchStates
     const updatedDataSource = tableProps?.dataSource?.map((record: BaseRecord) => ({
       ...record,
       status: switchStates[record.id] ? "ACTIVE" : "INACTIVE"
@@ -47,6 +50,9 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
     setDataSource(updatedDataSource);
   }, [tableProps.dataSource, switchStates]);
 
+  useEffect(() => {
+    localStorage.setItem("switchStates", JSON.stringify(switchStates));
+  }, [switchStates]);
   return (
     <List>
       <Table {...tableProps} dataSource={dataSource} rowKey="id">
