@@ -55,7 +55,7 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
   }, [switchStates]);
   return (
     <List>
-      <Table {...tableProps} dataSource={dataSource} rowKey="id">
+      <Table dataSource={dataSource} rowKey="id" key={JSON.stringify(dataSource)}>
         <Table.Column dataIndex="id" title={"ID"} />
         {/* <Table.Column
           dataIndex={["createdAt"]}
