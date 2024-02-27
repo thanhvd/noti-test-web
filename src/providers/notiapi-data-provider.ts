@@ -104,7 +104,7 @@ export const dataProvider = (
     const url = `${apiUrl}/${resource}/${id}/update`;
 
     const { headers, method } = meta ?? {};
-    const requestMethod = (method as MethodTypesWithBody) ?? "post";
+    const requestMethod = (method as MethodTypesWithBody) ?? "put";
 
     const { data } = await httpClient[requestMethod](url, variables, {
       headers,

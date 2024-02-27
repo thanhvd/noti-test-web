@@ -5,7 +5,7 @@ import React from "react";
 
 export const EmailVendorsEdit: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, formLoading } = useForm({});
-
+  
   return (
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
       <Form {...formProps} layout="vertical">
