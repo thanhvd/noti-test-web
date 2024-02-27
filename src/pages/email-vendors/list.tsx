@@ -18,7 +18,8 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
     syncWithLocation: true,
   });
 
-  console.log("TB PROPS: ", tableProps.dataSource)
+  console.log("TB: ", tableProps.dataSource)
+
   const [switchStates, setSwitchStates] = useState<{ [key: string]: boolean }>(() => {
     const savedState = localStorage.getItem("switchStates");
     return savedState ? JSON.parse(savedState) : {};
@@ -40,14 +41,14 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
     });
   };
 
-  console.log("SWITCH STATE: ", switchStates)
-
   useEffect(() => {
-    const updatedDataSource = tableProps?.dataSource?.map((record: BaseRecord) => ({
-      ...record,
-      status: switchStates[record.id] ? "ACTIVE" : "INACTIVE"
-    }));
-    setDataSource(updatedDataSource);
+    if (tableProps?.dataSource) {
+      const updatedDataSource = tableProps.dataSource.map((record: BaseRecord) => ({
+        ...record,
+        status: switchStates[record.id ?? ''] ? "ACTIVE" : "INACTIVE"
+      }));
+      setDataSource(updatedDataSource);
+    }
   }, [tableProps.dataSource, switchStates]);
 
   useEffect(() => {
@@ -85,7 +86,7 @@ export const EmailVendorsList: React.FC<IResourceComponentsProps> = () => {
           render={(_, record: BaseRecord) => (
             <Space>
               <Switch
-                checked={switchStates[record.id]}
+                checked={switchStates[record.id ?? '']}
                 onChange={(checked) => handleChangeStatus(checked, record.id)}
               />
               <EditButton hideText size="small" recordItemId={record.id} />
