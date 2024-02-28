@@ -14,7 +14,6 @@ export const SystemConfig: React.FC<IResourceComponentsProps> = () => {
     console.log(`switch to ${checked}`)
   }
   return (
-    <List>
       <Space direction="vertical">
         <Title >System Configuration</Title>
         <Space direction="vertical" >
@@ -27,6 +26,5 @@ export const SystemConfig: React.FC<IResourceComponentsProps> = () => {
           <Button style={{ border: "solid 2px", borderRadius: "20px", padding: "8px 20px 30px 22px", color: "gray" }}>Update Status</Button>
         </Space>
       </Space>
-    </List>
   );
 };
