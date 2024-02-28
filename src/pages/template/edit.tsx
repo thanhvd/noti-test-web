@@ -1,7 +1,8 @@
 import { Edit, useForm } from "@refinedev/antd";
 import { IResourceComponentsProps } from "@refinedev/core";
 import { Form, Input, Select } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ReactQuill from "react-quill";
 
 export const TemplateEdit: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, formLoading } = useForm({});
@@ -25,7 +26,8 @@ export const TemplateEdit: React.FC<IResourceComponentsProps> = () => {
           label={"Content"}
           name={["content"]}
         >
-          <Input />
+          {/* <Input /> */}
+          <ReactQuill />
         </Form.Item>
       </Form>
     </Edit>

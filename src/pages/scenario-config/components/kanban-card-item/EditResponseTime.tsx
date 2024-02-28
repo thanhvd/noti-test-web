@@ -1,5 +1,5 @@
-import { Form, InputNumber, Modal, Space, Typography } from 'antd';
-import { FC } from 'react';
+import { Form, InputNumber, Modal, Space, Typography } from "antd";
+import { FC } from "react";
 
 const { Paragraph } = Typography;
 
@@ -23,14 +23,14 @@ export const EditResponseTime: FC<any> = ({
             onOk();
           })
           .catch((info) => {
-            console.log('Validate Failed:', info);
+            console.log("Validate Failed:", info);
           });
       }}
     >
-      {' '}
+      {" "}
       <Form
         form={form}
-        layout='vertical'
+        layout="vertical"
         initialValues={{
           responseTimeHour: stepData.responseTimeHour,
           responseTimeMin: stepData.responseTimeMin,
@@ -38,15 +38,15 @@ export const EditResponseTime: FC<any> = ({
         }}
       >
         {/* <Title level={5}>{"Repsonse time"}</Title> */}
-        <Paragraph>{'Repsonse time'}</Paragraph>
-        <Space direction='horizontal'>
-          <Form.Item label={'Hour'} name={['responseTimeHour']}>
+        <Paragraph>{"Repsonse time"}</Paragraph>
+        <Space direction="horizontal">
+          <Form.Item label={"Hour"} name={["responseTimeHour"]}>
             <InputNumber />
           </Form.Item>
-          <Form.Item label={'Minute'} name={['responseTimeMin']}>
+          <Form.Item label={"Minute"} name={["responseTimeMin"]}>
             <InputNumber />
           </Form.Item>
-          <Form.Item label={'Second'} name={['responseTimeSecond']}>
+          <Form.Item label={"Second"} name={["responseTimeSecond"]}>
             <InputNumber />
           </Form.Item>
         </Space>

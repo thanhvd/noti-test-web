@@ -1,6 +1,7 @@
+import TextEditor from "@/components/text-editor/text-editor";
 import { Create, useForm } from "@refinedev/antd";
 import { IResourceComponentsProps } from "@refinedev/core";
-import { Form, Input, Select } from "antd";
+import { Form, Input } from "antd";
 import React from "react";
 
 export const TemplateCreate: React.FC<IResourceComponentsProps> = () => {
@@ -9,7 +10,6 @@ export const TemplateCreate: React.FC<IResourceComponentsProps> = () => {
   return (
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
-
         <Form.Item
           label={"Channel"}
           name={["channel"]}
@@ -41,7 +41,7 @@ export const TemplateCreate: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input />
+          <TextEditor />
         </Form.Item>
       </Form>
     </Create>

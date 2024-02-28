@@ -16,6 +16,8 @@ export const TemplateList: React.FC<IResourceComponentsProps> = () => {
     syncWithLocation: true,
   });
 
+  console.log("DATA: ", tableProps.dataSource)
+
 
   return (
     <List>
@@ -38,7 +40,13 @@ export const TemplateList: React.FC<IResourceComponentsProps> = () => {
         /> */}
         <Table.Column dataIndex="channel" title={"Channel"} />
         <Table.Column dataIndex="title" title={"Title"} />
-        <Table.Column dataIndex="content" title={"Content"} />
+        <Table.Column
+          dataIndex="content"
+          title={"Content"}
+          render={(html) => (
+            <div dangerouslySetInnerHTML={{ __html: html }} />
+          )}
+        />
 
         <Table.Column
           title={"Actions"}
