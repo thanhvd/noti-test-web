@@ -44,6 +44,7 @@ import { EmailVendorsCreate, EmailVendorsEdit, EmailVendorsList, EmailVendorsSho
 import { MessagesCreate, MessagesEdit, MessagesList, MessagesShow } from "@/pages/messages";
 import { StepsCreate, StepsEdit, StepsList, StepsShow } from "@/pages/steps";
 import { DashboardPage } from "@/pages/dashboard";
+import { SystemConfig } from "@/pages/system-config";
 
 function AppRouter() {
   return (
@@ -97,6 +98,10 @@ function AppRouter() {
           <Route path="create" element={<EmailVendorsCreate />} />
           <Route path="edit/:id" element={<EmailVendorsEdit />} />
           <Route path="show/:id" element={<EmailVendorsShow />} />
+        </Route>
+
+        <Route path="/system-config">
+          <Route index element={<SystemConfig />} />
         </Route>
 
         <Route path="/messages">

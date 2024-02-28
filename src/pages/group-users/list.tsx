@@ -20,6 +20,17 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
     resource: "groupDetails",
   });
 
+  const { data: userData, isLoading: userIsLoading } = useMany({
+    resource: "user",
+    ids:
+      tableProps?.dataSource
+        ?.map((item) => item?.userId)
+        .filter(Boolean) ?? [],
+    queryOptions: {
+      enabled: !!tableProps?.dataSource?.length,
+    },
+  });
+
   // const { data: users } = useMany({
   //   resource: "users",
   //   ids: groupDetails?.data.map((groupDetail) => groupDetail.userId),
@@ -51,6 +62,17 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
         <Table.Column dataIndex="name" title={"Name"} />
         <Table.Column dataIndex="topic" title={"Topic"} />
         <Table.Column dataIndex="channelAvails" title={"Channel Available"} />
+        <Table.Column
+          dataIndex={"userId"}
+          title={"User"}
+          render={(value) =>
+            userIsLoading ? (
+              <>Loading...</>
+            ) : (
+              userData?.data?.find((item) => item.id === value)?.email
+            )
+          }
+        />
 
         <Table.Column
           title={"Actions"}

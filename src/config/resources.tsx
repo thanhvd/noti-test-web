@@ -3,6 +3,7 @@ import type { IResourceItem } from "@refinedev/core";
 import {
   AuditOutlined,
   ClusterOutlined,
+  CustomerServiceOutlined,
   DashboardOutlined,
   PicRightOutlined,
   UserOutlined,
@@ -92,6 +93,15 @@ export const resources: IResourceItem[] = [
       label: "Email Vendors",
       canDelete: true,
       icon: <AuditOutlined />
+    },
+  },
+  {
+    name: "system-config",
+    list: "/system-config",
+    meta: {
+      label: "System config",
+      canDelete: true,
+      icon: <CustomerServiceOutlined />
     },
   },
   // {
