@@ -4,6 +4,7 @@ import {
   ErrorComponent,
   ThemedLayoutV2,
   ThemedSiderV2,
+  ThemedTitleV2,
 } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
@@ -58,6 +59,20 @@ function AppRouter() {
             <ThemedLayoutV2
               Header={() => <Header sticky />}
               Sider={(props) => <ThemedSiderV2 {...props} fixed />}
+              Title={(props) => (
+                <ThemedTitleV2
+                  {...props}
+                  text="Failover Manager"
+                  icon={
+                    <img
+                      width="24"
+                      height="24"
+                      src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-failover-big-data-flaticons-flat-flat-icons.png"
+                      alt="Failover Manager"
+                    />
+                  }
+                />
+              )}
             >
               <Outlet />
             </ThemedLayoutV2>
