@@ -1,6 +1,7 @@
 import TextEditor from "@/components/text-editor/text-editor";
 import { Create, useForm } from "@refinedev/antd";
 import { IResourceComponentsProps } from "@refinedev/core";
+import MDEditor from "@uiw/react-md-editor";
 import { Form, Input } from "antd";
 import React from "react";
 
@@ -41,7 +42,7 @@ export const TemplateCreate: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <TextEditor />
+          <MDEditor data-color-mode="light" />
         </Form.Item>
       </Form>
     </Create>

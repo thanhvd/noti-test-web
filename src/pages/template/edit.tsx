@@ -1,8 +1,8 @@
 import { Edit, useForm } from "@refinedev/antd";
 import { IResourceComponentsProps } from "@refinedev/core";
-import { Form, Input, Select } from "antd";
-import React, { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
+import MDEditor from "@uiw/react-md-editor";
+import { Form, Input } from "antd";
+import React from "react";
 
 export const TemplateEdit: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, formLoading } = useForm({});
@@ -10,24 +10,14 @@ export const TemplateEdit: React.FC<IResourceComponentsProps> = () => {
   return (
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
       <Form {...formProps} layout="vertical">
-        <Form.Item
-          label={"Channel"}
-          name={["channel"]}
-        >
+        <Form.Item label={"Channel"} name={["channel"]}>
           <Input />
         </Form.Item>
-        <Form.Item
-          label={"Title"}
-          name={["title"]}
-        >
+        <Form.Item label={"Title"} name={["title"]}>
           <Input />
         </Form.Item>
-        <Form.Item
-          label={"Content"}
-          name={["content"]}
-        >
-          {/* <Input /> */}
-          <ReactQuill />
+        <Form.Item label={"Content"} name={["content"]}>
+          <MDEditor data-color-mode="light" />
         </Form.Item>
       </Form>
     </Edit>
