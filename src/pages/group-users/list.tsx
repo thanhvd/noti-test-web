@@ -6,10 +6,15 @@ import {
   List,
   ShowButton,
   useTable,
-} from "@refinedev/antd";
-import { BaseRecord, IResourceComponentsProps, useList, useMany } from "@refinedev/core";
-import { Space, Table } from "antd";
-import React, { useEffect } from "react";
+} from '@refinedev/antd';
+import {
+  BaseRecord,
+  IResourceComponentsProps,
+  useList,
+  useMany,
+} from '@refinedev/core';
+import { Space, Table } from 'antd';
+import React, { useEffect } from 'react';
 
 export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable({
@@ -17,15 +22,13 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
   });
 
   const { data: groupDetails } = useList({
-    resource: "groupDetails",
+    resource: 'groupDetails',
   });
 
   const { data: userData, isLoading: userIsLoading } = useMany({
-    resource: "user",
+    resource: 'user',
     ids:
-      tableProps?.dataSource
-        ?.map((item) => item?.userId)
-        .filter(Boolean) ?? [],
+      tableProps?.dataSource?.map((item) => item?.userId).filter(Boolean) ?? [],
     queryOptions: {
       enabled: !!tableProps?.dataSource?.length,
     },
@@ -39,11 +42,10 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
   //   },
   // });
 
-
   return (
     <List>
-      <Table {...tableProps} rowKey="id">
-        <Table.Column dataIndex="id" title={"ID"} />
+      <Table {...tableProps} rowKey='id'>
+        <Table.Column dataIndex='id' title={'ID'} />
         {/* <Table.Column
           dataIndex={["createdAt"]}
           title={"Created At"}
@@ -59,12 +61,12 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
           title={"Updated At"}
           render={(value: any) => <DateField value={value} />}
         /> */}
-        <Table.Column dataIndex="name" title={"Name"} />
-        <Table.Column dataIndex="topic" title={"Topic"} />
-        <Table.Column dataIndex="channelAvails" title={"Channel Available"} />
+        <Table.Column dataIndex='name' title={'Name'} />
+        <Table.Column dataIndex='topic' title={'Topic'} />
+        <Table.Column dataIndex='channelAvails' title={'Channel Available'} />
         <Table.Column
-          dataIndex={"userId"}
-          title={"User"}
+          dataIndex={'userId'}
+          title={'User'}
           render={(value) =>
             userIsLoading ? (
               <>Loading...</>
@@ -75,13 +77,13 @@ export const GroupUserList: React.FC<IResourceComponentsProps> = () => {
         />
 
         <Table.Column
-          title={"Actions"}
-          dataIndex="actions"
+          title={'Actions'}
+          dataIndex='actions'
           render={(_, record: BaseRecord) => (
             <Space>
-              <EditButton hideText size="small" recordItemId={record.id} />
-              <ShowButton hideText size="small" recordItemId={record.id} />
-              <DeleteButton hideText size="small" recordItemId={record.id} />
+              <EditButton hideText size='small' recordItemId={record.id} />
+              <ShowButton hideText size='small' recordItemId={record.id} />
+              <DeleteButton hideText size='small' recordItemId={record.id} />
             </Space>
           )}
         />
