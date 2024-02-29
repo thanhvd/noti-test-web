@@ -3,31 +3,31 @@ import { CrudFilters, IResourceComponentsProps } from '@refinedev/core';
 import { Form, Input, Select } from 'antd';
 import React from 'react';
 
-export const GroupUserCreate: React.FC<IResourceComponentsProps> = () => {
+export const GroupCreate: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, queryResult } = useForm({});
 
   // const groupData = queryResult?.data?.data;
 
-  const { selectProps: userSelectProps } = useSelect({
-    resource: 'user',
-    optionLabel: 'email',
-    queryOptions: {},
-    // filters: ['email'],
-    // defaultValue: groupData?.category?.id,
-    // queryOptions: {
-    //   enabled: !!groupData?.category?.id,
-    // },
-    onSearch: (value) => {
-      const filters: CrudFilters = [];
-      filters.push({
-        field: 'email',
-        operator: 'eq',
-        value: value,
-      });
+  // const { selectProps: userSelectProps } = useSelect({
+  //   resource: 'user',
+  //   optionLabel: 'email',
+  //   queryOptions: {},
+  //   // filters: ['email'],
+  //   // defaultValue: groupData?.category?.id,
+  //   // queryOptions: {
+  //   //   enabled: !!groupData?.category?.id,
+  //   // },
+  //   onSearch: (value) => {
+  //     const filters: CrudFilters = [];
+  //     filters.push({
+  //       field: 'email',
+  //       operator: 'eq',
+  //       value: value,
+  //     });
 
-      return filters;
-    },
-  });
+  //     return filters;
+  //   },
+  // });
 
   return (
     <Create saveButtonProps={saveButtonProps}>
@@ -41,15 +41,15 @@ export const GroupUserCreate: React.FC<IResourceComponentsProps> = () => {
         <Form.Item label={'Channel Available'} name={['channelAvails']}>
           <Input />
         </Form.Item>
-        <Form.Item label='User' name={['User', 'id']}>
+        {/* <Form.Item label='User' name={['User', 'id']}>
           <Select
             {...userSelectProps}
-            mode='multiple'
+            // mode='multiple'
             showSearch
             allowClear
             autoClearSearchValue={true}
           />
-        </Form.Item>
+        </Form.Item> */}
         {/* <Form.Item
           label={"Topic"}
           name={["topic"]}

@@ -61,14 +61,21 @@ export const resources: IResourceItem[] = [
   },
   {
     name: "group",
-    list: "/group-users",
-    create: "/group-users/create",
-    edit: "/group-users/edit/:id",
-    show: "/group-users/show/:id",
+    list: "/groups",
+    create: "/groups/create",
+    edit: "/groups/edit/:id",
+    show: "/groups/show/:id",
     meta: {
-      label: "Group Users",
+      label: "Group",
       canDelete: true,
       icon: <UsergroupAddOutlined />,
+    },
+  },
+  {
+    name: "group-user",
+    list: "/groups/:id/users",
+    meta: {
+      hide: true
     },
   },
   {

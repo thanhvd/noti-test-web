@@ -5,7 +5,7 @@ import React from 'react';
 
 const { Title } = Typography;
 
-export const GroupUserShow: React.FC<IResourceComponentsProps> = () => {
+export const GroupShow: React.FC<IResourceComponentsProps> = () => {
   const { queryResult } = useShow({});
   const { data, isLoading } = queryResult;
 

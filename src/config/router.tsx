@@ -21,12 +21,6 @@ import {
   ScenarioList,
   ScenarioShow,
 } from "@/pages/scenarios";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "@/pages/categories";
 import { ForgotPassword } from "@/pages/forgotPassword";
 import { Login } from "@/pages/login";
 import { Register } from "@/pages/register";
@@ -34,12 +28,7 @@ import { KanbanCreateStage, KanbanPage } from "@/pages/scenario-config";
 import { KanbanCreatePage } from "@/pages/scenario-config/create";
 import { KanbanEditPage } from "@/pages/scenario-config/edit";
 import { KanbanEditStage } from "@/pages/scenario-config/edit-stage";
-import {
-  GroupUserCreate,
-  GroupUserEdit,
-  GroupUserList,
-  GroupUserShow,
-} from "@/pages/group-users";
+import { GroupCreate, GroupEdit, GroupList, GroupShow } from "@/pages/groups";
 import {
   TemplateCreate,
   TemplateEdit,
@@ -63,6 +52,7 @@ import { DashboardPage } from "@/pages/dashboard";
 import { SystemConfig } from "@/pages/system-config";
 import { UserMessageList } from "@/pages/user-messages/list";
 import { StepMessagesList } from "@/pages/step-messages";
+import { GroupUserList } from "@/pages/groups/users";
 
 function AppRouter() {
   return (
@@ -111,12 +101,12 @@ function AppRouter() {
         <Route path="/user-messages">
           <Route path=":id" element={<UserMessageList />} />
         </Route>
-
-        <Route path="/group-users">
-          <Route index element={<GroupUserList />} />
-          <Route path="create" element={<GroupUserCreate />} />
-          <Route path="edit/:id" element={<GroupUserEdit />} />
-          <Route path="show/:id" element={<GroupUserShow />} />
+        <Route path="/groups">
+          <Route index element={<GroupList />} />
+          <Route path="create" element={<GroupCreate />} />
+          <Route path="edit/:id" element={<GroupEdit />} />
+          <Route path="show/:id" element={<GroupShow />} />
+          <Route path=":id/users" element={<GroupUserList />} />
         </Route>
 
         <Route path="/template">

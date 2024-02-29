@@ -3,7 +3,7 @@ import { IResourceComponentsProps } from '@refinedev/core';
 import { Form, Input, Select } from 'antd';
 import React from 'react';
 
-export const GroupUserEdit: React.FC<IResourceComponentsProps> = () => {
+export const GroupEdit: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, formLoading } = useForm({});
 
   return (
