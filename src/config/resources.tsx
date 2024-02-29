@@ -35,7 +35,7 @@ export const resources: IResourceItem[] = [
     create: "/scenarios/config/:id/create",
     edit: "/scenarios/config/:id/edit/:id",
     meta: {
-      hide: true
+      hide: true,
     },
   },
   {
@@ -56,9 +56,18 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Users",
       canDelete: true,
-      icon: <UserOutlined />
+      icon: <UserOutlined />,
     },
   },
+  // {
+  //   name: "user/messages",
+  //   list: "/user-messages/:id",
+  //   meta: {
+  //     label: "User Messages",
+  //     canDelete: true,
+  //     icon: <UserOutlined />,
+  //   },
+  // },
   {
     name: "group",
     list: "/group-users",
@@ -68,7 +77,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Group Users",
       canDelete: true,
-      icon: <UsergroupAddOutlined />
+      icon: <UsergroupAddOutlined />,
     },
   },
   {
@@ -80,7 +89,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Templates",
       canDelete: true,
-      icon: <PicRightOutlined />
+      icon: <PicRightOutlined />,
     },
   },
   {
@@ -92,7 +101,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Email Vendors",
       canDelete: true,
-      icon: <AuditOutlined />
+      icon: <AuditOutlined />,
     },
   },
   {
@@ -101,7 +110,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "System config",
       canDelete: true,
-      icon: <CustomerServiceOutlined />
+      icon: <CustomerServiceOutlined />,
     },
   },
   // {
@@ -124,7 +133,7 @@ export const resources: IResourceItem[] = [
     meta: {
       label: "Messages",
       canDelete: true,
-      hide: true
+      hide: true,
     },
   },
 ];

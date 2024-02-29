@@ -14,12 +14,7 @@ import {
 } from "@refinedev/react-router-v6";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Header } from "@/components/header";
-import {
-  UserCreate,
-  UserEdit,
-  UserList,
-  UserShow,
-} from "@/pages/users";
+import { UserCreate, UserEdit, UserList, UserShow } from "@/pages/users";
 import {
   ScenarioCreate,
   ScenarioEdit,
@@ -39,13 +34,34 @@ import { KanbanCreateStage, KanbanPage } from "@/pages/scenario-config";
 import { KanbanCreatePage } from "@/pages/scenario-config/create";
 import { KanbanEditPage } from "@/pages/scenario-config/edit";
 import { KanbanEditStage } from "@/pages/scenario-config/edit-stage";
-import { GroupUserCreate, GroupUserEdit, GroupUserList, GroupUserShow } from "@/pages/group-users";
-import { TemplateCreate, TemplateEdit, TemplateList, TemplateShow } from "@/pages/template";
-import { EmailVendorsCreate, EmailVendorsEdit, EmailVendorsList, EmailVendorsShow } from "@/pages/email-vendors";
-import { MessagesCreate, MessagesEdit, MessagesList, MessagesShow } from "@/pages/messages";
+import {
+  GroupUserCreate,
+  GroupUserEdit,
+  GroupUserList,
+  GroupUserShow,
+} from "@/pages/group-users";
+import {
+  TemplateCreate,
+  TemplateEdit,
+  TemplateList,
+  TemplateShow,
+} from "@/pages/template";
+import {
+  EmailVendorsCreate,
+  EmailVendorsEdit,
+  EmailVendorsList,
+  EmailVendorsShow,
+} from "@/pages/email-vendors";
+import {
+  MessagesCreate,
+  MessagesEdit,
+  MessagesList,
+  MessagesShow,
+} from "@/pages/messages";
 import { StepsCreate, StepsEdit, StepsList, StepsShow } from "@/pages/steps";
 import { DashboardPage } from "@/pages/dashboard";
 import { SystemConfig } from "@/pages/system-config";
+import { UserMessageList } from "@/pages/user-messages/list";
 
 function AppRouter() {
   return (
@@ -83,15 +99,16 @@ function AppRouter() {
           index
           element={<NavigateToResource resource="users" />}
         /> */}
-        <Route
-          index
-          element={<DashboardPage />}
-        />
+        <Route index element={<DashboardPage />} />
         <Route path="/users">
           <Route index element={<UserList />} />
           <Route path="create" element={<UserCreate />} />
           <Route path="edit/:id" element={<UserEdit />} />
           <Route path="show/:id" element={<UserShow />} />
+        </Route>
+
+        <Route path="/user-messages">
+          <Route path=":id" element={<UserMessageList />} />
         </Route>
 
         <Route path="/group-users">
@@ -138,7 +155,14 @@ function AppRouter() {
           <Route path="create" element={<ScenarioCreate />} />
           <Route path="edit/:id" element={<ScenarioEdit />} />
           <Route path="show/:id" element={<ScenarioShow />} />
-          <Route path="config/:id" element={<KanbanPage><Outlet /></KanbanPage>}>
+          <Route
+            path="config/:id"
+            element={
+              <KanbanPage>
+                <Outlet />
+              </KanbanPage>
+            }
+          >
             {/* <Route index element={<KanbanPage />} /> */}
             <Route path="create" element={<KanbanCreatePage />} />
             <Route path="edit/:id" element={<KanbanEditPage />} />
@@ -153,11 +177,15 @@ function AppRouter() {
           <Route path="edit/:id" element={<CategoryEdit />} />
           <Route path="show/:id" element={<CategoryShow />} />
         </Route> */}
-        <Route
-          path="/scrumboard"
-          element={<Outlet />}
-        >
-          <Route path="kanban" element={<KanbanPage><Outlet /></KanbanPage>}>
+        <Route path="/scrumboard" element={<Outlet />}>
+          <Route
+            path="kanban"
+            element={
+              <KanbanPage>
+                <Outlet />
+              </KanbanPage>
+            }
+          >
             <Route path="create" element={<KanbanCreatePage />} />
             <Route path="edit/:id" element={<KanbanEditPage />} />
             <Route path="stages/create" element={<KanbanCreateStage />} />
@@ -169,20 +197,14 @@ function AppRouter() {
 
       <Route
         element={
-          <Authenticated
-            key="authenticated-outer"
-            fallback={<Outlet />}
-          >
+          <Authenticated key="authenticated-outer" fallback={<Outlet />}>
             <NavigateToResource />
           </Authenticated>
         }
       >
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route
-          path="/forgot-password"
-          element={<ForgotPassword />}
-        />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
     </Routes>
   );
