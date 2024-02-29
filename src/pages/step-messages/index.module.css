@@ -1,0 +1,31 @@
+.blue {
+  border-radius: 8px;
+  background-color: #1677ff;
+  padding: 5px;
+  color: white;
+  width: fit-content;
+}
+
+.green {
+  border-radius: 8px;
+  background-color: #00a215;
+  padding: 5px;
+  color: white;
+  width: fit-content;
+}
+
+.red {
+  border-radius: 8px;
+  background-color: #f44336;
+  padding: 5px;
+  color: white;
+  width: fit-content;
+}
+
+.yellow {
+  border-radius: 8px;
+  background-color: #fad156;
+  padding: 5px;
+  color: white;
+  width: fit-content;
+}

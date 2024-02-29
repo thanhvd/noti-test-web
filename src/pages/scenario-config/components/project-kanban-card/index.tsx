@@ -1,6 +1,12 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo, useState } from "react";
 
-import { useDelete, useNavigation, useUpdate } from '@refinedev/core';
+import {
+  useDelete,
+  useLink,
+  useNavigation,
+  useParsed,
+  useUpdate,
+} from "@refinedev/core";
 
 import {
   BellOutlined,
@@ -9,8 +15,8 @@ import {
   MailOutlined,
   MessageOutlined,
   MoreOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
 import {
   Button,
   Card,
@@ -20,28 +26,28 @@ import {
   Skeleton,
   Space,
   theme,
-} from 'antd';
-import dayjs from 'dayjs';
+} from "antd";
+import dayjs from "dayjs";
 
-import { Text } from '@/components';
-import { User } from '@/graphql/schema.types';
-import { getDateColor } from '@/utilities';
-import { TextField } from '@refinedev/antd';
-import styles from './index.module.css';
-import { EditMessageCard } from '../kanban-card-item/EditMessageCard';
-import { EditEmailCard } from '../kanban-card-item/EditEmailCard';
-import { EditResponseTime } from '../kanban-card-item/EditResponseTime';
-import { EditRetryTime } from '../kanban-card-item/EditRetryTime';
-import { EditStart } from '../kanban-card-item/EditStart';
-import EditIcon from '@/components/icon/EditIcon';
-import ReverseIcon from '@/components/icon/ReverseIcon';
-import ClockIcon from '@/components/icon/ClockIcon';
-import CollorBellIcon from '@/components/icon/ColorBellIcon';
-import ComputerTransfer from '@/components/icon/ComputerTransferIcon';
-import favIcon from '@/assets/211694_bell_icon.png';
-import transfIcon from '@/assets/compute-trans.png';
-import roundtransIcon from '@/assets/circle-arrow-icon.png';
-import clockIcon from '@/assets/clock.png';
+import { Text } from "@/components";
+import { User } from "@/graphql/schema.types";
+import { getDateColor } from "@/utilities";
+import { TextField } from "@refinedev/antd";
+import styles from "./index.module.css";
+import { EditMessageCard } from "../kanban-card-item/EditMessageCard";
+import { EditEmailCard } from "../kanban-card-item/EditEmailCard";
+import { EditResponseTime } from "../kanban-card-item/EditResponseTime";
+import { EditRetryTime } from "../kanban-card-item/EditRetryTime";
+import { EditStart } from "../kanban-card-item/EditStart";
+import EditIcon from "@/components/icon/EditIcon";
+import ReverseIcon from "@/components/icon/ReverseIcon";
+import ClockIcon from "@/components/icon/ClockIcon";
+import CollorBellIcon from "@/components/icon/ColorBellIcon";
+import ComputerTransfer from "@/components/icon/ComputerTransferIcon";
+import favIcon from "@/assets/211694_bell_icon.png";
+import transfIcon from "@/assets/compute-trans.png";
+import roundtransIcon from "@/assets/circle-arrow-icon.png";
+import clockIcon from "@/assets/clock.png";
 
 // const { Text } = Typography;
 
@@ -89,6 +95,8 @@ export const ProjectCard = ({ id, checkList, dueDate, channel, data }: any) => {
     setDirty(true);
   };
 
+  const Link = useLink();
+
   return (
     <ConfigProvider
       theme={{
@@ -97,29 +105,29 @@ export const ProjectCard = ({ id, checkList, dueDate, channel, data }: any) => {
             colorText: token.colorTextSecondary,
           },
           Card: {
-            headerBg: 'transparent',
+            headerBg: "transparent",
           },
         },
       }}
     >
       <Card
         className={styles.container}
-        size='default'
+        size="default"
         title={
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
               gap: 8,
             }}
           >
-            {stepData?.channel === 'PUSH' && (
+            {stepData?.channel === "PUSH" && (
               <BellOutlined style={{ fontSize: 24 }} />
             )}
-            {stepData?.channel === 'EMAIL' && (
+            {stepData?.channel === "EMAIL" && (
               <MailOutlined style={{ fontSize: 24 }} />
             )}
-            {stepData?.channel === 'SMS' && (
+            {stepData?.channel === "SMS" && (
               <MessageOutlined style={{ fontSize: 24 }} />
             )}
             <Text ellipsis={{ tooltip: channel }}>{channel}</Text>
@@ -128,8 +136,8 @@ export const ProjectCard = ({ id, checkList, dueDate, channel, data }: any) => {
         extra={
           dirty && (
             <Button
-              type='primary'
-              title='Save'
+              type="primary"
+              title="Save"
               // onPointerDown={(e) => {
               //   e.stopPropagation();
               // }}
@@ -142,7 +150,7 @@ export const ProjectCard = ({ id, checkList, dueDate, channel, data }: any) => {
                     values: formValues,
                     id,
                     meta: {
-                      method: 'put',
+                      method: "put",
                     },
                   },
                   {
@@ -190,28 +198,31 @@ export const ProjectCard = ({ id, checkList, dueDate, channel, data }: any) => {
           // </Dropdown>
         }
       >
-        <Space direction='vertical'>
+        <Space direction="vertical">
           {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Text size="xl" className={styles.text} >Gửi đến:</Text>
             <EditIcon onClick={showMailModal} width={25} height={25} />
           </div> */}
-          <Text size='xl' className={styles.title}>
+          <Text size="xl" className={styles.title}>
             {stepData.templateTitle}
           </Text>
-          <Text size='xs' className={styles.content}>
+          <Text size="xs" className={styles.content}>
             {stepData.templateContent}
           </Text>
           <Text
-            size='sm'
+            size="sm"
             className={styles.editMessage}
             onClick={showMessageModal}
           >
             Edit message
           </Text>
+          <Link Link to={`/step-messages/${id}`}>
+            <Button>View message</Button>
+          </Link>
           <div className={styles.timeContainer}>
             <div className={styles.timeItem}>
               <ComputerTransfer
-                style={{ alignSelf: 'center' }}
+                style={{ alignSelf: "center" }}
                 width={25}
                 height={25}
               />
@@ -220,29 +231,29 @@ export const ProjectCard = ({ id, checkList, dueDate, channel, data }: any) => {
             <div className={styles.timeItem}>
               <div>{stepData?.numberRetry}</div>
               <ReverseIcon
-                style={{ alignSelf: 'center' }}
+                style={{ alignSelf: "center" }}
                 width={25}
                 height={25}
                 onClick={showRetryModal}
               />
               <div className={styles.smallTimeItem}>
-                <TextField value={stepData?.delayRetryHour} />h{' '}
-                <TextField value={stepData?.delayRetryMin} />m{' '}
-                <TextField value={stepData?.delayRetrySecond} />s{' '}
+                <TextField value={stepData?.delayRetryHour} />h{" "}
+                <TextField value={stepData?.delayRetryMin} />m{" "}
+                <TextField value={stepData?.delayRetrySecond} />s{" "}
               </div>
             </div>
 
             <div className={styles.timeItem}>
               <ClockIcon
-                style={{ alignSelf: 'center' }}
+                style={{ alignSelf: "center" }}
                 width={25}
                 height={25}
                 onClick={showResponseTimeModal}
               />
               <div className={styles.smallTimeItem}>
-                <TextField value={stepData?.responseTimeHour} />h{' '}
-                <TextField value={stepData?.responseTimeMin} />m{' '}
-                <TextField value={stepData?.responseTimeSecond} />s{' '}
+                <TextField value={stepData?.responseTimeHour} />h{" "}
+                <TextField value={stepData?.responseTimeMin} />m{" "}
+                <TextField value={stepData?.responseTimeSecond} />s{" "}
               </div>
             </div>
           </div>
@@ -303,31 +314,31 @@ export const ProjectCard = ({ id, checkList, dueDate, channel, data }: any) => {
 export const ProjectCardSkeleton = () => {
   return (
     <Card
-      size='small'
+      size="small"
       bodyStyle={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '8px',
+        display: "flex",
+        justifyContent: "center",
+        gap: "8px",
       }}
       title={
         <Skeleton.Button
           active
-          size='small'
+          size="small"
           style={{
-            width: '200px',
-            height: '22px',
+            width: "200px",
+            height: "22px",
           }}
         />
       }
     >
       <Skeleton.Button
         active
-        size='small'
+        size="small"
         style={{
-          width: '200px',
+          width: "200px",
         }}
       />
-      <Skeleton.Avatar active size='small' />
+      <Skeleton.Avatar active size="small" />
     </Card>
   );
 };

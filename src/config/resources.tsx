@@ -59,15 +59,6 @@ export const resources: IResourceItem[] = [
       icon: <UserOutlined />,
     },
   },
-  // {
-  //   name: "user/messages",
-  //   list: "/user-messages/:id",
-  //   meta: {
-  //     label: "User Messages",
-  //     canDelete: true,
-  //     icon: <UserOutlined />,
-  //   },
-  // },
   {
     name: "group",
     list: "/group-users",

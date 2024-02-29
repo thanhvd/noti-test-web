@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { MessageOutlined } from "@ant-design/icons";
 import {
   DateField,
   DeleteButton,
@@ -7,8 +8,13 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { BaseRecord, IResourceComponentsProps, useMany } from "@refinedev/core";
-import { Space, Table } from "antd";
+import {
+  BaseRecord,
+  IResourceComponentsProps,
+  useLink,
+  useMany,
+} from "@refinedev/core";
+import { Button, Space, Table } from "antd";
 import React from "react";
 
 export const StepsList: React.FC<IResourceComponentsProps> = () => {
@@ -19,13 +25,14 @@ export const StepsList: React.FC<IResourceComponentsProps> = () => {
   const { data: templateData, isLoading: templateIsLoading } = useMany({
     resource: "templates",
     ids:
-      tableProps?.dataSource
-        ?.map((item) => item?.templateId)
-        .filter(Boolean) ?? [],
+      tableProps?.dataSource?.map((item) => item?.templateId).filter(Boolean) ??
+      [],
     queryOptions: {
       enabled: !!tableProps?.dataSource,
     },
   });
+
+  const Link = useLink();
 
   return (
     <List>
@@ -57,7 +64,8 @@ export const StepsList: React.FC<IResourceComponentsProps> = () => {
             ) : (
               templateData?.data?.find((item) => item.id === value)?.title
             )
-          } />
+          }
+        />
         <Table.Column dataIndex="nextStepId" title={"NextStep"} />
         <Table.Column dataIndex="prevStepId" title={"PrevStep"} />
         <Table.Column dataIndex="channelData" title={"ChannelData"} />
@@ -67,7 +75,10 @@ export const StepsList: React.FC<IResourceComponentsProps> = () => {
         <Table.Column dataIndex="delayRetrySecond" title={"DelayRetrySecond"} />
         <Table.Column dataIndex="responseTimeHour" title={"ResponseTimeHour"} />
         <Table.Column dataIndex="responseTimeMin" title={"ResonseTimeMinute"} />
-        <Table.Column dataIndex="responseTimeSecond" title={"ResponseTimeSecond"} />
+        <Table.Column
+          dataIndex="responseTimeSecond"
+          title={"ResponseTimeSecond"}
+        />
         <Table.Column dataIndex="sentTime" title={"SentTime"} />
         <Table.Column dataIndex="isFailOver" title={"IsFailOver"} />
         <Table.Column dataIndex="groupCode" title={"GroupCode"} />

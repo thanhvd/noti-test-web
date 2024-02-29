@@ -62,6 +62,7 @@ import { StepsCreate, StepsEdit, StepsList, StepsShow } from "@/pages/steps";
 import { DashboardPage } from "@/pages/dashboard";
 import { SystemConfig } from "@/pages/system-config";
 import { UserMessageList } from "@/pages/user-messages/list";
+import { StepMessagesList } from "@/pages/step-messages";
 
 function AppRouter() {
   return (
@@ -148,6 +149,10 @@ function AppRouter() {
           <Route path="create" element={<StepsCreate />} />
           <Route path="edit/:id" element={<StepsEdit />} />
           <Route path="show/:id" element={<StepsShow />} />
+        </Route>
+
+        <Route path="/step-messages">
+          <Route path=":id" element={<StepMessagesList />} />
         </Route>
 
         <Route path="/scenarios">

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  DateField,
   DeleteButton,
   EditButton,
   List,
@@ -16,36 +15,18 @@ export const TemplateList: React.FC<IResourceComponentsProps> = () => {
     syncWithLocation: true,
   });
 
-  console.log("DATA: ", tableProps.dataSource)
-
+  console.log("DATA: ", tableProps.dataSource);
 
   return (
     <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
-        {/* <Table.Column
-          dataIndex={["createdAt"]}
-          title={"Created At"}
-          render={(value: any) => <DateField value={value} />}
-        />
-        <Table.Column
-          dataIndex={["deletedAt"]}
-          title={"Deleted At"}
-          render={(value: any) => <DateField value={value} />}
-        />
-        <Table.Column
-          dataIndex={["updatedAt"]}
-          title={"Updated At"}
-          render={(value: any) => <DateField value={value} />}
-        /> */}
         <Table.Column dataIndex="channel" title={"Channel"} />
         <Table.Column dataIndex="title" title={"Title"} />
         <Table.Column
           dataIndex="content"
           title={"Content"}
-          render={(html) => (
-            <div dangerouslySetInnerHTML={{ __html: html }} />
-          )}
+          render={(html) => <div dangerouslySetInnerHTML={{ __html: html }} />}
         />
 
         <Table.Column
