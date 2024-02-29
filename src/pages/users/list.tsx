@@ -25,28 +25,6 @@ export const UserList: React.FC<IResourceComponentsProps> = () => {
   return (
     <>
       <List>
-        <Form>
-          <Form.Item label="File">
-            <Form.Item
-              name="file"
-              valuePropName="fileList"
-              getValueFromEvent={getValueFromEvent}
-              noStyle
-            >
-              <Upload.Dragger
-                name="file"
-                action={`${NOTIAPI_URL}/group/import/excel`}
-                listType="picture"
-                maxCount={5}
-                multiple
-              >
-                <p className="ant-upload-text">
-                  Drag & drop a file in this area
-                </p>
-              </Upload.Dragger>
-            </Form.Item>
-          </Form.Item>
-        </Form>
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="id" title={"ID"} />
           <Table.Column dataIndex="email" title={"Email"} />
